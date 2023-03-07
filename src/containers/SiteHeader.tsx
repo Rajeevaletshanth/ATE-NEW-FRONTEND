@@ -54,7 +54,7 @@ const SiteHeader = () => {
     },
   ]);
   const [headerSelected, setHeaderSelected] =
-    React.useState<SiteHeaders>("Header 1");
+    React.useState<SiteHeaders>("Header 2");
 
   const [isTopOfPage, setIsTopOfPage] = React.useState(window.pageYOffset < 5);
   const location = useLocation();
@@ -70,7 +70,7 @@ const SiteHeader = () => {
       setHeaderSelected("Header 2");
     }
     if (location.pathname === "/") {
-      setHeaderSelected("Header 1");
+      setHeaderSelected("Header 2");
     }
 
     // disconnect the observer

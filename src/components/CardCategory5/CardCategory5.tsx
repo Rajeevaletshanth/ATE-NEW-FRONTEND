@@ -17,11 +17,11 @@ const CardCategory5: FC<CardCategory5Props> = ({
   return (
     <Link
       to={href}
-      className={`nc-CardCategory5 flex flex-col ${className}`}
+      className={`nc-CardCategory5 flex flex-col ${className} w-11/12`}
       data-nc-id="CardCategory5"
     >
       <div
-        className={`flex-shrink-0 relative w-full aspect-w-4 aspect-h-3 h-0 rounded-2xl overflow-hidden group`}
+        className={`flex-shrink-0 relative w-full aspect-w-4 aspect-h-4  rounded-2xl overflow-hidden group`}
       >
         <NcImage
           src={thumbnail}
@@ -31,15 +31,15 @@ const CardCategory5: FC<CardCategory5Props> = ({
       </div>
       <div className="mt-4 px-3 truncate">
         <h2
-          className={`text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate`}
+          className={`text-base text-center sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate`}
         >
           {name}
         </h2>
-        <span
+        {/* <span
           className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
         >
           {convertNumbThousand(count)} properties
-        </span>
+        </span> */}
       </div>
     </Link>
   );

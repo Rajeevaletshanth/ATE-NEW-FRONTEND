@@ -13,6 +13,24 @@ export interface TaxonomyType {
   count?: number;
   thumbnail?: string;
   desc?: string;
+  type?: string;
+  color?: TwMainColor | string;
+  taxonomy: "category" | "tag";
+  listingType?: "stay" | "experiences" | "car";
+}
+
+export interface ProductsType {
+  id: string | number;
+  name: string;
+  href: string;
+  count?: number;
+  thumbnail?: string;
+  desc?: string;
+  price?: number;
+  category_id?: number;
+  restaurant_id?: number;
+  vegetarian?: boolean;
+  addons?: number[];
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";
   listingType?: "stay" | "experiences" | "car";

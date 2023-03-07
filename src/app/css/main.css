@@ -5,6 +5,38 @@
     background-position: center;
 }
 
+.restaurant-bg {
+  background-image: url('../images/gourmet2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* .restaurant-bg::before {
+  content: "";
+  background-image: url("../images/grilled-chicken.png");
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+} */
+
+hr {
+    border: none;
+    border-top: 2px solid red;
+    /* margin: 10px 0; */
+    text-align: center;
+    width: 120px;
+    margin: 0 auto;
+  }
+
+.darkSecondary{
+  background-color: #101625;
+}
+
 /* .dashboard-bg::before {
     content: "";
     position: absolute;

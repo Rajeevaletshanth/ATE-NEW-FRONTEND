@@ -18,10 +18,11 @@ const StartRating: FC<StartRatingProps> = ({
       data-nc-id="StartRating"
     >
       <div className="pb-[2px]">
-        <StarIcon className="w-[18px] h-[18px] text-orange-500" />
+        <StarIcon className="w-[18px] h-[18px] text-red-600" />
       </div>
-      <span className="font-medium ">{point}</span>
-      <span className="text-neutral-500 dark:text-neutral-400">
+      <span className="font-bold ">{point}</span>
+      &nbsp; |&nbsp;
+      <span className="text-red-600 dark:text-red-600">
         ({reviewCount})
       </span>
     </div>
