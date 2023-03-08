@@ -7,7 +7,7 @@ import Footer from "shared/Footer/Footer";
 import PageHome from "containers/PageHome/PageHome";
 import Page404 from "containers/Page404/Page404";
 // import ListingStayPage from "containers/ListingStayPage/ListingStayPage";
-// import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
+import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
 // import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
 // import ListingExperiencesMapPage from "containers/ListingExperiencesPage/ListingExperiencesMapPage";
 // import ListingStayDetailPage from "containers/ListingDetailPage/ListingStayDetailPage";
@@ -60,7 +60,7 @@ export const pages: Page[] = [
   // { path: "/home-3", component: PageHome3 },
 
   // { path: "/listing-stay", component: ListingStayPage },
-  // { path: "/listing-stay-map", component: ListingStayMapPage },
+  { path: "/listing-stay-map", component: ListingStayMapPage },
   // { path: "/listing-stay-detail", component: ListingStayDetailPage },
 
   // {

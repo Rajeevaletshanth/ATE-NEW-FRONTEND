@@ -1,98 +1,67 @@
-import React, {useState, useEffect} from "react";
-import SectionHero2 from "./components/SectionHero/SectionHero2";
+import React, { FC } from "react";
+import BackgroundSection from "components/BackgroundSection/BackgroundSection";
 import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
-import { TaxonomyType } from "data/types";
-import SectionSliderNewCategories from "./components/SectionSliderNewCategories/SectionSliderNewCategories";
-import SectionSliderNewCategoriesDifferentCard from "./components/SectionSliderNewCategories/SectionSliderNewCategoriesDifferentCard";
-import "../../css/main.css"
+import SectionGridAuthorBox from "components/SectionGridAuthorBox/SectionGridAuthorBox";
+import SectionHeroArchivePage from "components/SectionHeroArchivePage/SectionHeroArchivePage";
+import SectionSliderNewCategories from "components/SectionSliderNewCategories/SectionSliderNewCategories";
+import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
+import SectionGridHasMap from "./SectionGridHasMap";
+import { Helmet } from "react-helmet";
+import RestaurauntHero from "./components/RestaurauntHero/RestaurauntHero";
 
-
-
-const DEMO_CATS: TaxonomyType[] = [
-  {
-    id: "1",
-    href: "/listing-stay",
-    name: "New Yourk",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-  },
-];
-
-const DEMO_CATS_2: TaxonomyType[] = [
-  {
-    id: "1",
-    href: "/listing-stay",
-    name: "KFC",
-    desc:" Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1488265976/k2htrr9z4vsxkjbthskk.png",
-  },
-];
-
-const OFFER_CAT : TaxonomyType[] = [
-  {
-    id: "1",
-    href: "/offers",
-    name: "Weekend Vibes",
-    taxonomy: "category",
-    thumbnail:
-      "https://mypromo.azureedge.net/promotions/promo.lk-promo-b240e8f7897c4dc191e43abc4e628ee2.jpg",
-  },
-];
-
-const Restaurant = () => {
-
-
-  useEffect(() => {
-
-  },[])
-
-  return (
-    <div className="nc-PageHome relative overflow-hidden ">
-      <BgGlassmorphism />
-      <SectionHero2 className="pt-10 lg:pt-16 lg:pb-16" />
-        {/* hero Section */}
-        {/* <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
-          <SectionSliderNewCategories 
-            categories={OFFER_CAT}
-            categoryCardType="card2"
-            itemPerRow={4}
-            heading="Top Brands"
-            subHeading=""
-            sliderStyle="style1"
-            uniqueClassName="PageHome_s2"
-          />
-        </div> */}
-        {/* <div className="flex flex-col lg:flex-row ">
-          <div className="w-full lg:w-2/6 bg-gray-200 container relative space-y-24 lg:space-y-28 lg:mb-28">
-            svasvsvvsvdvsdvsdvsvsdvsdvsdv
-            sav
-            sav
-            asv
-            sdgs
-          </div>
-          <div className="w-full lg:w-4/6 bg-gray-300 container relative space-y-24 lg:space-y-28 lg:mb-28">3</div>
-          <div className="w-full lg:w-2/6 bg-gray-400 container relative space-y-24 lg:space-y-28 lg:mb-28">2</div>
-        </div> */}
-
-        {/* <div className="flex flex-col lg:flex-row lg:h-screen">
-          <div className="bg-gray-800 text-white flex-shrink-0 w-full lg:w-1/4">
-          vasvsvvsvdvsdvsdvsvsdvsdvsdv
-                    sav
-                    sav
-                    asv
-                    sdgs
-          </div>
-          <div className="bg-gray-100 w-full lg:w-3/4">
-            fjgfishfbis
-          </div>
-        </div> */}
-    </div>
-  );
+export interface ListingStayMapPageProps {
+  className?: string;
 }
 
-export default Restaurant;
+const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
+  className = "",
+}) => {
+  return (
+    <div
+      className={`nc-ListingStayMapPage relative ${className}`}
+      data-nc-id="ListingStayMapPage"
+    >
+      <Helmet>
+        <title>Chisfis || Booking React Template</title>
+      </Helmet>
+      <BgGlassmorphism />
+
+      {/* SECTION HERO */}
+      <div className="container pt-10 pb-24 lg:pt-16 lg:pb-28">
+        {/* <SectionHeroArchivePage currentPage="Stays" currentTab="Stays" /> */}
+        <RestaurauntHero />
+      </div>
+
+      {/* SECTION */}
+      <div className="container pb-24 lg:pb-28 2xl:pl-10 xl:pr-0 xl:max-w-none">
+        <SectionGridHasMap />
+      </div>
+
+      <div className="container overflow-hidden">
+        {/* SECTION 1 */}
+        <div className="relative py-16">
+          <BackgroundSection />
+          <SectionSliderNewCategories
+            heading="Explore by types of stays"
+            subHeading="Explore houses based on 10 types of stays"
+            categoryCardType="card5"
+            itemPerRow={5}
+            sliderStyle="style2"
+            uniqueClassName="ListingStayMapPage"
+          />
+        </div>
+
+        {/* SECTION */}
+        <SectionSubscribe2 className="py-24 lg:py-28" />
+
+        {/* SECTION */}
+        <div className="relative py-16 mb-24 lg:mb-28">
+          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
+          <SectionGridAuthorBox />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ListingStayMapPage;
