@@ -33,6 +33,7 @@ export interface LocationStates {
   "/account-savelists"?: {};
   "/account-password"?: {};
   "/account-billing"?: {};
+  "/favourite"?: {};
   //
   "/blog"?: {};
   "/blog-single"?: {};

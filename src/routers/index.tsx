@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
@@ -8,7 +8,7 @@ import PageHome from "containers/PageHome/PageHome";
 import Page404 from "containers/Page404/Page404";
 // import ListingStayPage from "containers/ListingStayPage/ListingStayPage";
 import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
-// import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
+import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
 // import ListingExperiencesMapPage from "containers/ListingExperiencesPage/ListingExperiencesMapPage";
 // import ListingStayDetailPage from "containers/ListingDetailPage/ListingStayDetailPage";
 // import ListingExperiencesDetailPage from "containers/ListingDetailPage/ListingExperiencesDetailPage";
@@ -18,10 +18,11 @@ import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
 // import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
 // import PayPage from "containers/PayPage/PayPage";
 // import AuthorPage from "containers/AuthorPage/AuthorPage";
-// import AccountPage from "containers/AccountPage/AccountPage";
-// import AccountPass from "containers/AccountPage/AccountPass";
-// import AccountSavelists from "containers/AccountPage/AccountSavelists";
-// import AccountBilling from "containers/AccountPage/AccountBilling";
+import AccountPage from "app/containers/AccountPage/AccounPage";
+import AccountPass from "app/containers/AccountPage/AccountPass";
+import AccountSavelists from "app/containers/AccountPage/AccountSavelists";
+import AccountBilling from "app/containers/AccountPage/AccountBilling";
+import Favourite from "app/containers/AccountPage/Favourite";
 // import PageContact from "containers/PageContact/PageContact";
 // import PageAbout from "containers/PageAbout/PageAbout";
 // import PageSignUp from "containers/PageSignUp/PageSignUp";
@@ -89,10 +90,11 @@ export const pages: Page[] = [
   // { path: "/pay-done", component: PayPage },
 
   // { path: "/author", component: AuthorPage },
-  // { path: "/account", component: AccountPage },
-  // { path: "/account-password", component: AccountPass },
-  // { path: "/account-savelists", component: AccountSavelists },
-  // { path: "/account-billing", component: AccountBilling },
+  { path: "/account", component: AccountPage },
+  { path: "/account-password", component: AccountPass },
+  { path: "/account-savelists", component: AccountSavelists },
+  { path: "/account-billing", component: AccountBilling },
+  {path: "/favourite", component: Favourite},
 
   // { path: "/blog", component: BlogPage },
   // { path: "/blog-single", component: BlogSingle },
