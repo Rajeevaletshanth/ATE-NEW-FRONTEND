@@ -22,43 +22,21 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
       data-nc-id="ListingStayMapPage"
     >
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>Restaurant - Barbeque Nation</title>
       </Helmet>
-      <BgGlassmorphism />
+      
+      {/* <BgGlassmorphism /> */}
 
       {/* SECTION HERO */}
-      <div className="container pt-10 pb-24 lg:pt-16 lg:pb-28">
-        {/* <SectionHeroArchivePage currentPage="Stays" currentTab="Stays" /> */}
+      <div className="container relative space-y-5 mb-5 mt-5 lg:space-y-5 lg:mb-5">
         <RestaurauntHero />
+        
       </div>
+      
 
       {/* SECTION */}
-      <div className="container pb-24 lg:pb-28 2xl:pl-10 xl:pr-0 xl:max-w-none">
+      <div className="container relative space-y-5 mb-5 mt-5 lg:space-y-5 lg:mb-5">
         <SectionGridHasMap />
-      </div>
-
-      <div className="container overflow-hidden">
-        {/* SECTION 1 */}
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionSliderNewCategories
-            heading="Explore by types of stays"
-            subHeading="Explore houses based on 10 types of stays"
-            categoryCardType="card5"
-            itemPerRow={5}
-            sliderStyle="style2"
-            uniqueClassName="ListingStayMapPage"
-          />
-        </div>
-
-        {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
-
-        {/* SECTION */}
-        <div className="relative py-16 mb-24 lg:mb-28">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
-        </div>
       </div>
     </div>
   );

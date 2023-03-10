@@ -133,7 +133,7 @@ const StayCard: FC<StayCardProps> = ({
           {/* // )} */}
         </div>
         <div className="flex justify-center">
-            <Button className="bg-red-400 text-gray-100 hover:bg-red-600" fontSize="text-xs sm:text-sm font-small" sizeClass="px-2 py-1 sm:px-3">Order Now</Button>
+            <Button className="bg-primary-400 text-gray-100 hover:bg-primary-500" fontSize="text-xs sm:text-sm font-medium" sizeClass="px-8 py-2 sm:px-8">Add to Cart</Button>
         </div>
 
       </div>

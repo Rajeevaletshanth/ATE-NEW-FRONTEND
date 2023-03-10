@@ -27,6 +27,7 @@
     "react-dates": "^21.8.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
@@ -35,7 +36,7 @@
     "web-vitals": "^3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

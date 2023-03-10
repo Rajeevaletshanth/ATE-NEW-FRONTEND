@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoImg from "images/ate/ate-main.png";
-import logoLightImg from "images/ate/ate-main.png";
+import logoImg from "images/ate/ate-full-red.png";
+import logoLightImg from "images/ate/ate-full-red.png";
 // import LogoSvgLight from "images/ate/trace.svg";
 // import LogoSvg from "images/ate/trace.svg";
 

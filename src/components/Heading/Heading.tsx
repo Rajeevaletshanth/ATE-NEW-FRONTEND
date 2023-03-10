@@ -6,6 +6,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   desc?: ReactNode;
   hasNextPrev?: boolean;
   isCenter?: boolean;
+  underline?: boolean;
 }
 
 const Heading: React.FC<HeadingProps> = ({
@@ -14,6 +15,7 @@ const Heading: React.FC<HeadingProps> = ({
   className = "mb-12 lg:mb-16 text-neutral-900 dark:text-neutral-50",
   isCenter = false,
   hasNextPrev = false,
+  underline = true,
   ...args
 }) => {
   return (
@@ -28,9 +30,9 @@ const Heading: React.FC<HeadingProps> = ({
         <h2 className={`text-3xl md:text-4xl font-semibold`} {...args}>
           {children || `Section Heading`}
         </h2>
-        <hr className="flex justify-center mt-2"/>
+        {underline && <hr className="flex justify-center mt-2"/>}
         {desc && (
-          <span className="mt-2 md:mt-3 font-normal block text-base sm:text-xl text-neutral-500 dark:text-neutral-400">
+          <span className={`${underline && "mt-2 md:mt-3"} font-normal block text-base sm:text-xl text-neutral-500 dark:text-neutral-400`}>
             {desc}
           </span>
         )}
