@@ -10,7 +10,7 @@ export interface SectionHeroProps {
 const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
   return (
     <div
-      className={`nc-SectionHero flex flex-col-reverse lg:flex-col relative ${className} dashboard-bg items-center`}
+      className={`nc-SectionHero hidden lg:flex flex-col-reverse lg:flex-col relative ${className} dashboard-bg items-center`}
       data-nc-id="SectionHero"
     >
       <div className="flex flex-col lg:flex-row items-center">
@@ -28,7 +28,7 @@ const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
         </div> */}
       </div>
 
-      <div className="hidden lg:block z-10 mb-12 lg:mb-0 lg:-mt-60  items-center">
+      <div className="hidden lg:block z-10 mb-2 lg:mb-0 lg:-mt-60  items-center">
         <HeroSearchForm />
       </div>
     </div>

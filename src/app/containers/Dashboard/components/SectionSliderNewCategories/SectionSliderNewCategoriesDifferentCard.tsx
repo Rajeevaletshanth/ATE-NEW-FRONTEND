@@ -149,7 +149,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
         </div>
 
         {sliderStyle === "style2" && (
-          <NextPrev className="justify-center mt-16" />
+          <NextPrev className="justify-center mt-4" />
         )}
       </div>
     </div>

@@ -28,8 +28,8 @@ import MyOrders from "app/containers/AccountPage/MyOrders";
 import Referal from "app/containers/AccountPage/Referal";
 // import PageContact from "containers/PageContact/PageContact";
 // import PageAbout from "containers/PageAbout/PageAbout";
-// import PageSignUp from "containers/PageSignUp/PageSignUp";
-// import PageLogin from "containers/PageLogin/PageLogin";
+import PageSignUp from "containers/PageSignUp/PageSignUp";
+import PageLogin from "containers/PageLogin/PageLogin";
 // import PageSubcription from "containers/PageSubcription/PageSubcription";
 // import BlogPage from "containers/BlogPage/BlogPage";
 // import BlogSingle from "containers/BlogPage/BlogSingle";
@@ -120,8 +120,8 @@ export const pages: Page[] = [
 
   // { path: "/contact", component: PageContact },
   // { path: "/about", component: PageAbout },
-  // { path: "/signup", component: PageSignUp },
-  // { path: "/login", component: PageLogin },
+  { path: "/signup", component: PageSignUp },
+  { path: "/login", component: PageLogin },
   // { path: "/subscription", component: PageSubcription },
 
 ];

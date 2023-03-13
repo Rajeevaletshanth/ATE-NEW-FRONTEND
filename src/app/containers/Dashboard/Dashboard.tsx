@@ -5,7 +5,7 @@ import { TaxonomyType } from "data/types";
 import SectionSliderNewCategories from "./components/SectionSliderNewCategories/SectionSliderNewCategories";
 import SectionSliderNewCategoriesDifferentCard from "./components/SectionSliderNewCategories/SectionSliderNewCategoriesDifferentCard";
 import "../../css/main.css"
-
+import { Helmet } from "react-helmet";
 //API
 import { getTopBrandsApi, getAllRestaurantApi, getAllProductsApi, getAllCombosApi, getCuisinesApi, getTopOfferssApi } from 'services/apiServices'
 import CardCategory1 from "components/StayCard/StayCard";
@@ -278,18 +278,22 @@ const Dashboard = () => {
 
   return (
     <div className="nc-PageHome relative overflow-hidden ">
-      <BgGlassmorphism />
+      <Helmet>
+        <title>ATE - AnyTimeEat</title>
+      </Helmet>
+
+      {/* <BgGlassmorphism /> */}
       <SectionHero2 className="pt-10 lg:pt-16 lg:pb-16" />
         {/* Top Brands */}
         {topBrands?.length > 0? 
-        <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+        <div className="container relative space-y-24 mb-24 mt-4 lg:mt-24 lg:space-y-28 lg:mb-28">
           <SectionSliderNewCategories 
             categories={topBrands}
             categoryCardType="card2"
             itemPerRow={4}
             heading="Top Brands"
             subHeading=""
-            sliderStyle="style1"
+            sliderStyle="none"
             uniqueClassName="PageHome_s2"
           />
         </div>:<></>}
@@ -314,7 +318,7 @@ const Dashboard = () => {
         <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
                     <SectionSliderNewCategoriesDifferentCard 
                         categories={allProducts}
-                        itemPerRow={5}
+                        itemPerRow={4}
                         heading="All Restaurant Menu"
                         subHeading="Good food is always cooking! Go ahead, order some yummy items from the menu"
                         sliderStyle="style2"
@@ -328,7 +332,7 @@ const Dashboard = () => {
           <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
                       <SectionSliderNewCategoriesDifferentCard 
                           categories={allCombo}
-                          itemPerRow={5}
+                          itemPerRow={4}
                           heading="All Combo Menu"
                           subHeading="Good food is always cooking! Go ahead, order some yummy items from the menu"
                           sliderStyle="style2"

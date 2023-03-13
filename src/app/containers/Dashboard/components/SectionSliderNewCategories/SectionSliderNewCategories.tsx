@@ -18,7 +18,7 @@ export interface SectionSliderNewCategoriesProps {
   categories?: TaxonomyType[];
   categoryCardType?: "card2" | "card3" | "card4" | "card5" | "card6" | "card7";
   itemPerRow?: 4 | 5;
-  sliderStyle?: "style1" | "style2";
+  sliderStyle?: "style1" | "style2" | "none";
   uniqueClassName: string;
 }
 
@@ -166,7 +166,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
         </div>
 
         {sliderStyle === "style2" && (
-          <NextPrev className="justify-center mt-16" />
+          <NextPrev className="justify-center mt-4" />
         )}
       </div>
     </div>

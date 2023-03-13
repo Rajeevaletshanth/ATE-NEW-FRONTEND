@@ -7,16 +7,18 @@ import dowloadAppBGPng from "images/dowloadAppBG.png";
 import appRightImg from "images/mobile.png";
 import btnIosPng from "images/btn-ios.png";
 import btnAndroidPng from "images/btn-android.png";
+import BgGlassmorphism from "components/BgGlassmorphism/BgGlassmorphism";
 const SectionDowloadApp = () => {
   return (
     <div className="relative pb-24 pt-24 lg:py-32 xl:py-64 2xl:py-48 ">
-      <BackgroundSection className="bg-red-500 bg-opacity-80 dark:bg-opacity-100 ">
+      
+      <BackgroundSection className="bg-primary-500 bg-opacity-80 dark:bg-primary-400 ">
         <img
           className="absolute inset-0 w-full h-full object-cover rounded-3xl object-right"
           src={dowloadAppBGPng}
           alt="dowloadAppPng"
         />
-
+{/* <BgGlassmorphism /> */}
         <div className="hidden lg:block absolute left-8 top-12 max-w-md xl:max-w-sm rounded-3xl overflow-hidden">
           <img src={appRightImg} alt="" />
         </div>
