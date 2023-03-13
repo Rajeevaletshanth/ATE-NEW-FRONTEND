@@ -18,11 +18,6 @@ const loginSocials = [
     icon: facebookSvg,
   },
   {
-    name: "Continue with Twitter",
-    href: "#",
-    icon: twitterSvg,
-  },
-  {
     name: "Continue with Google",
     href: "#",
     icon: googleSvg,

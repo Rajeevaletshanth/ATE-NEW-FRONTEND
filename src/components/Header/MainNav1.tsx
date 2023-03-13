@@ -19,6 +19,7 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
 
 
   const { signedIn } = useSelector((state:any) => state.auth.session)
+  const { username } = useSelector((state:any) => state.auth.user)
 
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
@@ -37,11 +38,11 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
             <SwitchDarkMode />
             {/* <SearchDropdown /> */}
             <NotifyDropdown />
-            
+
             <div className="px-1" />
-            {signedIn && <>
-            <AvatarDropdown />
-            </>}
+            {signedIn && <span className="flex flex-row">
+            <AvatarDropdown /> <span className="mt-2 ml-2 text-sm">{username}</span>
+            </span>}
 
             <div className="px-1" />
             {!signedIn && 

@@ -38,10 +38,9 @@ const solutions = [
 const solutionsFoot = [
   {
     name: "Help",
-    href: "##",
+    href: "/help",
     icon: LifebuoyIcon,
   },
-
   {
     name: "Logout",
     href: "/",
