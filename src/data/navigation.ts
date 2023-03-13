@@ -309,3 +309,22 @@ export const NAVIGATION_DEMO: NavItemType[] = [
     children: otherPageChildMenus,
   },
 ];
+
+
+export const MAIN_NAVIGATION: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: "/",
+    name: "Home",
+  },
+  {
+    id: ncNanoId(),
+    href: "/restaurant",
+    name: "Restaurant",
+  },
+  {
+    id: ncNanoId(),
+    href: "/contactus",
+    name: "Contact Us",
+  },
+]
