@@ -23,6 +23,16 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
               Account info
             </NavLink>
             <NavLink
+              to="/manage-address"
+              className={({ isActive }) =>
+                `block py-5 md:py-8 border-b-2 flex-shrink-0 ${
+                  isActive ? "border-primary-500 " : "border-transparent"
+                }`
+              }
+            >
+              Manage Address
+            </NavLink>
+            <NavLink
               to="/account-savelists"
               className={({ isActive }) =>
                 `block py-5 md:py-8 border-b-2 flex-shrink-0 ${
@@ -54,6 +64,17 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
             </NavLink>
 
             <NavLink
+              to="/myorders"
+              className={({ isActive }) =>
+                `block py-5 md:py-8 border-b-2 flex-shrink-0 ${
+                  isActive ? "border-primary-500 " : "border-transparent"
+                }`
+              }
+            >
+              My Orders
+            </NavLink>
+
+            <NavLink
               to="/favourite"
               className={({ isActive }) =>
                 `block py-5 md:py-8 border-b-2 flex-shrink-0 ${
@@ -62,6 +83,16 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
               }
             >
               Favourites
+            </NavLink>
+            <NavLink
+              to="/referal"
+              className={({ isActive }) =>
+                `block py-5 md:py-8 border-b-2 flex-shrink-0 ${
+                  isActive ? "border-primary-500" : "border-transparent"
+                }`
+              }
+            >
+              Referal
             </NavLink>
           </div>
         </div>

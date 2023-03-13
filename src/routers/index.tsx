@@ -23,6 +23,9 @@ import AccountPass from "app/containers/AccountPage/AccountPass";
 import AccountSavelists from "app/containers/AccountPage/AccountSavelists";
 import AccountBilling from "app/containers/AccountPage/AccountBilling";
 import Favourite from "app/containers/AccountPage/Favourite";
+import ManageAddress from "app/containers/AccountPage/ManageAddress";
+import MyOrders from "app/containers/AccountPage/MyOrders";
+import Referal from "app/containers/AccountPage/Referal";
 // import PageContact from "containers/PageContact/PageContact";
 // import PageAbout from "containers/PageAbout/PageAbout";
 // import PageSignUp from "containers/PageSignUp/PageSignUp";
@@ -95,6 +98,11 @@ export const pages: Page[] = [
   { path: "/account-savelists", component: AccountSavelists },
   { path: "/account-billing", component: AccountBilling },
   {path: "/favourite", component: Favourite},
+  {path: "/manage-address", component: ManageAddress},
+  {path: "/myorders", component: MyOrders},
+  {path: "/referal", component: Referal},
+
+
 
   // { path: "/blog", component: BlogPage },
   // { path: "/blog-single", component: BlogSingle },
