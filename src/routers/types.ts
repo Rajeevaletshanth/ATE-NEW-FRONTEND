@@ -2,6 +2,7 @@ import { ComponentType } from "react";
 
 export interface LocationStates {
   "/"?: {};
+  "/restaurant"?: {};
   "/restaurant/:id"?: {};
   "/#"?: {};
   "/home-2"?: {};

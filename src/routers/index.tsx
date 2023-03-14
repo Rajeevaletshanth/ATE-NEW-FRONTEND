@@ -15,7 +15,7 @@ import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExp
 // import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
 // import ListingCarMapPage from "containers/ListingCarPage/ListingCarMapPage";
 // import ListingCarDetailPage from "containers/ListingDetailPage/ListingCarDetailPage";
-// import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
+import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
 // import PayPage from "containers/PayPage/PayPage";
 // import AuthorPage from "containers/AuthorPage/AuthorPage";
 import AccountPage from "app/containers/AccountPage/AccounPage";
@@ -58,6 +58,7 @@ import Restaurant from "app/containers/Restaurant/Restaurant";
 export const pages: Page[] = [
   { path: "/", exact: true, component: Dashboard },
   { path: "/#", exact: true, component: Dashboard },
+  { path: "/restaurant", exact: true, component: Restaurant },
   { path: "/restaurant/:id", exact: false, component: Restaurant },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },
@@ -89,7 +90,7 @@ export const pages: Page[] = [
 
   // { path: "/listing-flights", component: ListingFlightsPage },
 
-  // { path: "/checkout", component: CheckOutPage },
+  { path: "/checkout", component: CheckOutPage },
   // { path: "/pay-done", component: PayPage },
 
   // { path: "/author", component: AuthorPage },
