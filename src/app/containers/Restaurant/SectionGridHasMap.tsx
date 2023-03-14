@@ -58,14 +58,15 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
           <div className="fixed xl:sticky top-10 xl:top-[88px] left-0 w-full h-full xl:h-[calc(100vh-88px)] rounded-md overflow-hidden py-3 ">
             <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-2 sm:space-y-2 px-0 sm:p-6 xl:p-4 ">
               <span className=" font-semibold text-3xl">Cart</span>
+              <p className=" text-xs mb-3 font-medium">Items : 04</p>
               <div className=" py-3 overflow-y-scroll h-80">
-                  <div>
-                    <h3 className="font-semibold">McDonalds</h3>
-                    <p className=" text-xs mb-3">American FastFood</p>
-                    <p className=" text-xs mb-3 font-medium">Items : 02</p>
+                <div>
+                  <h3 className="font-semibold">McDonalds</h3>
+                  <p className=" text-xs mb-8">American FastFood</p>
 
-                  </div>
-                    {/* <div className="flex flex-col sm:flex-row sm:items-center">
+
+                </div>
+                {/* <div className="flex flex-col sm:flex-row sm:items-center">
                     <div className="flex-shrink-0 w-full sm:w-40">
                       <div >
                         <img className="aspect-w-4 aspect-h-3 sm:aspect-h-4 rounded-2xl overflow-hidden" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
@@ -88,85 +89,85 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
                     </div>
                   </div> */}
 
-                  <div className="flex w-full space-x-2 mb-0">
-                    <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
-                    <div className="flex flex-col justify-between w-full pb-4">
-                      <div className="flex justify-between w-full pb-2 space-x-2">
-                        <div className="space-y-1">
-                          <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
-                          <p className="text-sm dark:text-gray-400"> 03</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-lg font-semibold">24 €</p>
-                          {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
-                          <NumberInput className="py-5" />
-                        </div>
-                        {/* <div className="text-center">
+                <div className="flex w-full space-x-2 mb-0">
+                  <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
+                  <div className="flex flex-col justify-between w-full pb-4">
+                    <div className="flex justify-between w-full pb-2 space-x-2">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
+                        <p className="text-sm dark:text-gray-400"> 03</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-semibold">24 €</p>
+                        {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
+                        <NumberInput className="py-5" />
+                      </div>
+                      {/* <div className="text-center">
                         <NumberInput />
                       </div> */}
-                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex w-full space-x-2 mb-0">
-                    <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
-                    <div className="flex flex-col justify-between w-full pb-4">
-                      <div className="flex justify-between w-full pb-2 space-x-2">
-                        <div className="space-y-1">
-                          <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
-                          <p className="text-sm dark:text-gray-400"> 03</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-lg font-semibold">24 €</p>
-                          {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
-                          <NumberInput className="py-5" />
-                        </div>
-                        {/* <div className="text-center">
+                <div className="flex w-full space-x-2 mb-0">
+                  <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
+                  <div className="flex flex-col justify-between w-full pb-4">
+                    <div className="flex justify-between w-full pb-2 space-x-2">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
+                        <p className="text-sm dark:text-gray-400"> 03</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-semibold">24 €</p>
+                        {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
+                        <NumberInput className="py-5" />
+                      </div>
+                      {/* <div className="text-center">
                         <NumberInput />
                       </div> */}
-                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex w-full space-x-2 mb-0">
-                    <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
-                    <div className="flex flex-col justify-between w-full pb-4">
-                      <div className="flex justify-between w-full pb-2 space-x-2">
-                        <div className="space-y-1">
-                          <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
-                          <p className="text-sm dark:text-gray-400"> 03</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-lg font-semibold">24 €</p>
-                          {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
-                          <NumberInput className="py-5" />
-                        </div>
-                        {/* <div className="text-center">
+                <div className="flex w-full space-x-2 mb-0">
+                  <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
+                  <div className="flex flex-col justify-between w-full pb-4">
+                    <div className="flex justify-between w-full pb-2 space-x-2">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
+                        <p className="text-sm dark:text-gray-400"> 03</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-semibold">24 €</p>
+                        {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
+                        <NumberInput className="py-5" />
+                      </div>
+                      {/* <div className="text-center">
                         <NumberInput />
                       </div> */}
-                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex w-full space-x-2 mb-0">
-                    <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
-                    <div className="flex flex-col justify-between w-full pb-4">
-                      <div className="flex justify-between w-full pb-2 space-x-2">
-                        <div className="space-y-1">
-                          <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
-                          <p className="text-sm dark:text-gray-400"> 03</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-lg font-semibold">24 €</p>
-                          {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
-                          <NumberInput className="py-5" />
-                        </div>
-                        {/* <div className="text-center">
+                <div className="flex w-full space-x-2 mb-0">
+                  <img className="flex-shrink-0 object-cover  w-20 h-20 dark:border-transparent rounded outline-none sm:w-20 sm:h-20 dark:bg-gray-500 shadow-slate-800 shadow-md" src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" loading="lazy" />
+                  <div className="flex flex-col justify-between w-full pb-4">
+                    <div className="flex justify-between w-full pb-2 space-x-2">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-semibold leading-snug sm:pr-8">name</h3>
+                        <p className="text-sm dark:text-gray-400"> 03</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-semibold">24 €</p>
+                        {/* <p className="text-sm line-through dark:text-gray-600">75.50€</p> */}
+                        <NumberInput className="py-5" />
+                      </div>
+                      {/* <div className="text-center">
                         <NumberInput />
                       </div> */}
-                      </div>
                     </div>
                   </div>
+                </div>
               </div>
 
 
