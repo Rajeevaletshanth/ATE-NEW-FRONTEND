@@ -9,7 +9,7 @@ const persistConfig = {
 	key: 'ate',
 	keyPrefix: '',
 	storage,
-	whitelist: ['auth', 'theme']
+	whitelist: ['auth', 'cart']
 }
 
 const store = configureStore({
@@ -26,14 +26,26 @@ store.asyncReducers = {}
 
 export const persistor = persistStore(store)
 
+// export const injectReducer = (key, reducer) => {
+// 	if (store.asyncReducers[key]) {
+// 		return false
+// 	}
+// 	store.asyncReducers[key] = reducer
+// 	store.replaceReducer(persistReducer(persistConfig, rootReducer(store.asyncReducers)))
+// 	persistor.persist()
+// 	return store
+// }
+
 export const injectReducer = (key, reducer) => {
 	if (store.asyncReducers[key]) {
-		return false
+	  return false;
 	}
-	store.asyncReducers[key] = reducer
-	store.replaceReducer(persistReducer(persistConfig, rootReducer(store.asyncReducers)))
-	persistor.persist()
-	return store
-}
+	store.asyncReducers[key] = reducer;
+	const newRootReducer = rootReducer(store.asyncReducers);
+	const persistedReducer = persistReducer(persistConfig, newRootReducer);
+	store.replaceReducer(persistedReducer);
+	persistor.persist();
+	return store;
+  };
 
 export default store

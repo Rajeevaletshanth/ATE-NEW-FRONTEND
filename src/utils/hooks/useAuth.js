@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { setUser, initialState } from 'store/auth/userSlice'
+// import { setCart, emptyCart } from 'store/cart/itemsSlice'
 import { loginApi } from 'services/authServices'
 // import { authenticate } from'services/ApiService'
 import { onSignInSuccess, onSignOutSuccess } from 'store/auth/sessionSlice'

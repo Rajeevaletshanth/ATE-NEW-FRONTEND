@@ -24,7 +24,7 @@ export const Alert: React.FC<AlertProps> = ({
       classes += " bg-status-successBg text-status-success";
       break;
     case "error":
-      classes += " bg-status-errorBg text-status-error";
+      classes += "text-primary-400 bg-primary-100";
       break;
     case "warning":
       classes += " bg-status-warningBg text-status-warning";
@@ -39,7 +39,7 @@ export const Alert: React.FC<AlertProps> = ({
     >
       <i className="pe-7s-info text-2xl mr-2"></i>
       {children}
-      <ButtonClose className="absolute top-4 right-6" />
+      {/* <ButtonClose className="absolute top-4 right-6" /> */}
     </div>
   );
 };

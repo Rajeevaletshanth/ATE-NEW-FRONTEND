@@ -31,6 +31,8 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const { signIn } = useAuth();
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
 
   const navigate = useNavigate()
 
@@ -43,8 +45,15 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
 
   const handleLogin = async(e:any) => {
     e.preventDefault();
-    const result = await signIn({ email, password })
-    // console.log(result)
+    setLoading(true);
+    const result = await signIn({ email, password }).then((res) => {
+      setLoading(false);
+      if(res.status == "failed")
+        setError(res.message)
+    }).catch((err) => {
+        setError(err.message)
+    })
+
   }
 
   return (
@@ -62,7 +71,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
               <a
                 key={index}
                 href={item.href}
-                className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
+                className="nc-will-change-transform flex w-full rounded-lg bg-gray-100 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
               >
                 <img
                   className="flex-shrink-0"
@@ -83,14 +92,18 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
           </div>
           {/* FORM */}
+
           <form className="grid grid-cols-1 gap-6" action="#" method="post" onSubmit={handleLogin}>
+            {error && 
+              <span className="text-center text-sm text-primary-400 bg-primary-100 p-1 py-4 rounded-sm">{error}</span>
+            }
             <label className="block">
               <span className="text-neutral-800 dark:text-neutral-200">
-                Email address
+                Email
               </span>
               <Input
                 type="email"
-                placeholder="example@example.com"
+                placeholder="Email"
                 className="mt-1"
                 required
                 onChange={(e) => setEmail(e.target.value)}
@@ -99,25 +112,31 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             <label className="block">
               <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                 Password
-                <Link to="/forgot-pass" className="text-sm">
-                  Forgot password?
-                </Link>
+                
               </span>
               <Input 
                 type="password" 
                 className="mt-1" 
+                placeholder="Password"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <ButtonPrimary type="submit" >Sign In</ButtonPrimary>
+            
+            <ButtonPrimary type="submit" loading={loading}>{loading? "Signing In" : "Sign In"}</ButtonPrimary>
           </form>
 
           {/* ==== */}
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
             New user? {` `}
-            <Link to="/signup">Create an account</Link>
+            <Link to="/signup" className="text-primary-500">Create an account</Link>
           </span>
+          <span className="block text-center text-neutral-700 dark:text-neutral-300">
+              <Link to="/forgot-password" className="text-sm text-center">
+                  Forgot password?
+              </Link>
+          </span>
+              
         </div>
       </div>
     </div>
