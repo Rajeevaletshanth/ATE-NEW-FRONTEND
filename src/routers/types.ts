@@ -2,6 +2,7 @@ import { ComponentType } from "react";
 
 export interface LocationStates {
   "/"?: {};
+  "/restaurant"?: {};
   "/restaurant/:id"?: {};
   "/#"?: {};
   "/home-2"?: {};
@@ -33,6 +34,11 @@ export interface LocationStates {
   "/account-savelists"?: {};
   "/account-password"?: {};
   "/account-billing"?: {};
+  "/favourite"?: {};
+  "/manage-address"?: {};
+  "/myorders"?: {};
+  "/referal"?: {};
+  
   //
   "/blog"?: {};
   "/blog-single"?: {};

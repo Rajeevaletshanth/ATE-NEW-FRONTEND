@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
@@ -8,20 +8,24 @@ import PageHome from "containers/PageHome/PageHome";
 import Page404 from "containers/Page404/Page404";
 // import ListingStayPage from "containers/ListingStayPage/ListingStayPage";
 import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
-// import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
+import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
 // import ListingExperiencesMapPage from "containers/ListingExperiencesPage/ListingExperiencesMapPage";
 // import ListingStayDetailPage from "containers/ListingDetailPage/ListingStayDetailPage";
 // import ListingExperiencesDetailPage from "containers/ListingDetailPage/ListingExperiencesDetailPage";
 // import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
 // import ListingCarMapPage from "containers/ListingCarPage/ListingCarMapPage";
 // import ListingCarDetailPage from "containers/ListingDetailPage/ListingCarDetailPage";
-// import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
+import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
 // import PayPage from "containers/PayPage/PayPage";
 // import AuthorPage from "containers/AuthorPage/AuthorPage";
-// import AccountPage from "containers/AccountPage/AccountPage";
-// import AccountPass from "containers/AccountPage/AccountPass";
-// import AccountSavelists from "containers/AccountPage/AccountSavelists";
-// import AccountBilling from "containers/AccountPage/AccountBilling";
+import AccountPage from "app/containers/AccountPage/AccounPage";
+import AccountPass from "app/containers/AccountPage/AccountPass";
+import AccountSavelists from "app/containers/AccountPage/AccountSavelists";
+import AccountBilling from "app/containers/AccountPage/AccountBilling";
+import Favourite from "app/containers/AccountPage/Favourite";
+import ManageAddress from "app/containers/AccountPage/ManageAddress";
+import MyOrders from "app/containers/AccountPage/MyOrders";
+import Referal from "app/containers/AccountPage/Referal";
 // import PageContact from "containers/PageContact/PageContact";
 // import PageAbout from "containers/PageAbout/PageAbout";
 import PageSignUp from "containers/PageSignUp/PageSignUp";
@@ -54,6 +58,7 @@ import Restaurant from "app/containers/Restaurant/Restaurant";
 export const pages: Page[] = [
   { path: "/", exact: true, component: Dashboard },
   { path: "/#", exact: true, component: Dashboard },
+  { path: "/restaurant", exact: true, component: Restaurant },
   { path: "/restaurant/:id", exact: false, component: Restaurant },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },
@@ -85,14 +90,20 @@ export const pages: Page[] = [
 
   // { path: "/listing-flights", component: ListingFlightsPage },
 
-  // { path: "/checkout", component: CheckOutPage },
+  { path: "/checkout", component: CheckOutPage },
   // { path: "/pay-done", component: PayPage },
 
   // { path: "/author", component: AuthorPage },
-  // { path: "/account", component: AccountPage },
-  // { path: "/account-password", component: AccountPass },
-  // { path: "/account-savelists", component: AccountSavelists },
-  // { path: "/account-billing", component: AccountBilling },
+  { path: "/account", component: AccountPage },
+  { path: "/account-password", component: AccountPass },
+  { path: "/account-savelists", component: AccountSavelists },
+  { path: "/account-billing", component: AccountBilling },
+  {path: "/favourite", component: Favourite},
+  {path: "/manage-address", component: ManageAddress},
+  {path: "/myorders", component: MyOrders},
+  {path: "/referal", component: Referal},
+
+
 
   // { path: "/blog", component: BlogPage },
   // { path: "/blog-single", component: BlogSingle },
