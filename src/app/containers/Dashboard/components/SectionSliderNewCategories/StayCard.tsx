@@ -1,6 +1,4 @@
 import React, { FC } from "react";
-import GallerySlider from "components/GallerySlider/GallerySlider";
-import { DEMO_STAY_LISTINGS } from "data/listings";
 import { StayDataType, ProductsType } from "data/types";
 import StartRating from "components/StartRating/StartRating";
 import { Link } from "react-router-dom";
@@ -15,32 +13,19 @@ export interface StayCardProps {
   data?: StayDataType;
   size?: "default" | "small";
   card_data: ProductsType;
+  addProduct:(data:any) => void
 }
-
-const DEMO_CAT: ProductsType = 
-  {
-    id: "1",
-    href: "/listing-stay",
-    name: "New Yourk",
-    desc: "Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-  }
-;
-
-const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
 const StayCard: FC<StayCardProps> = ({
   size = "default",
   className = "",
-  data = DEMO_DATA,
-  card_data = DEMO_CAT
+  card_data,
+  addProduct
 }) => {
   const {
     id,
     href,
+    type,
     name,
     desc,
     taxonomy,
@@ -51,7 +36,20 @@ const StayCard: FC<StayCardProps> = ({
     vegetarian,
     addons
   } = card_data
-// console.log(card_data)
+  
+  const addProductToCart = () => {
+    addProduct({
+      id: id,
+      type: type,
+      name: name,
+      restaurant_id: restaurant_id,
+      addons: addons,
+      vegetarian: vegetarian,
+      avatar: thumbnail,
+      price: price,
+      description: desc
+    })
+  }
   const renderSliderGallery = () => {
     return (
       <div className=" w-full">
@@ -133,7 +131,7 @@ const StayCard: FC<StayCardProps> = ({
           {/* // )} */}
         </div>
         <div className="flex justify-center">
-            <Button className="bg-primary-400 text-gray-100 hover:bg-primary-500" fontSize="text-xs sm:text-sm font-medium" sizeClass="px-8 py-2 sm:px-8">Add to Cart</Button>
+            <Button className="bg-primary-400 text-gray-100 hover:bg-primary-500" fontSize="text-xs sm:text-sm font-medium" sizeClass="px-8 py-2 sm:px-8" onClick={addProductToCart}>Add to Cart</Button>
         </div>
 
       </div>
@@ -146,7 +144,7 @@ const StayCard: FC<StayCardProps> = ({
       data-nc-id="StayCard"
     >
       {renderSliderGallery()}
-      <Link to={href}>{renderContent()}</Link>
+      {renderContent()}
     </div>
   );
 };

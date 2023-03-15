@@ -15,76 +15,26 @@ export interface SectionSliderNewCategoriesProps {
   itemClassName?: string;
   heading?: string;
   subHeading?: string;
-  categories?: ProductsType[];
+  categories: ProductsType[];
   categoryCardType?: "card2" | "card3" | "card4" | "card5";
   itemPerRow?: 4 | 5;
   sliderStyle?: "style1" | "style2";
   uniqueClassName: string;
+  addProduct:(data: any) => void
 }
 
-const DEMO_CATS: ProductsType[] = [
-  {
-    id: "1",
-    href: "/listing-stay",
-    name: "KFC",
-    desc: "Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1488265976/k2htrr9z4vsxkjbthskk.png",
-  },
-  {
-    id: "2",
-    href: "/listing-stay",
-    name: "Dominos",
-    desc: "Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWRRdK--jF8JStSkkQ48tU2BeklWAuwKAXiXN0Q8FRF-rmKO3SE-5QnxxYzG9HUc_zlFY&usqp=CAU",
-  },
-  {
-    id: "3",
-    href: "/listing-stay",
-    name: "KFC",
-    desc: "Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "1675391861810-Alexy_beautiful_restaurant_page_website_pizza_burger_noodles_ot_a2108342-ea7d-4c74-b8a5-e9e329a43116.png",
-  },
-  {
-    id: "4",
-    href: "/listing-stay",
-    name: "KFC",
-    desc: "Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1488265976/k2htrr9z4vsxkjbthskk.png",
-  },
-  {
-    id: "4",
-    href: "/listing-stay",
-    name: "KFC",
-    desc: "Finger lickin good",
-    taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1488265976/k2htrr9z4vsxkjbthskk.png",
-  },
-];
 
 const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   heading = "Heading of sections",
   subHeading = "Descriptions for sections",
   className = "",
   itemClassName = "",
-  categories = DEMO_CATS,
+  categories,
   itemPerRow = 5,
   categoryCardType = "card2",
   sliderStyle = "style1",
-  uniqueClassName
+  uniqueClassName,
+  addProduct
 }) => {
   const UNIQUE_CLASS =
     "SectionSliderNewCategories__" + uniqueClassName + useNcId();
@@ -125,7 +75,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   }, [MY_GLIDEJS, UNIQUE_CLASS]);
 
   const renderCard = (item: ProductsType, index: number) => {
-    return <StayCard card_data={item}/>
+    return <StayCard card_data={item} addProduct={addProduct}/>
   };
 
   return (

@@ -40,7 +40,7 @@ const Avatar: FC<AvatarProps> = ({
         <NcImage
           className={`absolute inset-0 w-full h-full object-cover ${radius}`}
           src={url}
-          alt={name}
+          // alt={name}
         />
       )}
       <span className="wil-avatar__name">{name[0]}</span>

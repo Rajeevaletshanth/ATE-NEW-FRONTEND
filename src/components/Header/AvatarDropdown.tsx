@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { Popover, Transition } from "@headlessui/react";
 import {
   UserCircleIcon,
@@ -48,7 +49,12 @@ const solutionsFoot = [
   },
 ];
 
-export default function AvatarDropdown() {
+export interface AvatarDropdownProps {
+  imgUrl?: string
+}
+
+
+const AvatarDropdown: FC<AvatarDropdownProps> = ({ imgUrl }) => {
   const { signOut } = useAuth();
   const handleSignout = async() => {
     await signOut()
@@ -61,7 +67,7 @@ export default function AvatarDropdown() {
             <Popover.Button
               className={`inline-flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
-              <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9" />
+              {imgUrl? <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9" imgUrl={imgUrl}/> : <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9"/>}   
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -132,3 +138,5 @@ export default function AvatarDropdown() {
     </div>
   );
 }
+
+export default AvatarDropdown;

@@ -5,6 +5,7 @@ import SearchDropdown from "./SearchDropdown";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import MenuBar from "shared/MenuBar/MenuBar";
 import NotifyDropdown from "./NotifyDropdown";
+import CartDropdown from "./CartDropdown";
 import AvatarDropdown from "./AvatarDropdown";
 import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import HeroSearchForm2MobileFactory from "components/HeroSearchForm2Mobile/HeroSearchForm2MobileFactory";
@@ -19,7 +20,7 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
 
 
   const { signedIn } = useSelector((state:any) => state.auth.session)
-  const { username } = useSelector((state:any) => state.auth.user)
+  const { username, avatar } = useSelector((state:any) => state.auth.user)
 
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
@@ -37,11 +38,12 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
           <div className="hidden lg:flex xl:flex items-center space-x-0.5">
             <SwitchDarkMode />
             {/* <SearchDropdown /> */}
-            <NotifyDropdown />
+            {/* <NotifyDropdown /> */}
+            <CartDropdown />
 
             <div className="px-1" />
             {signedIn && <span className="flex flex-row">
-            <AvatarDropdown /> <span className="mt-2 ml-2 text-sm">{username}</span>
+            <AvatarDropdown imgUrl={avatar}/> <span className="mt-2 ml-2 text-sm">{username}</span>
             </span>}
 
             <div className="px-1" />

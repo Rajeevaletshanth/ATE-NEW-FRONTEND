@@ -22,6 +22,7 @@ export interface TaxonomyType {
 export interface ProductsType {
   id: string | number;
   name: string;
+  type?: string;
   href: string;
   count?: number;
   thumbnail?: string;

@@ -170,7 +170,7 @@ const SiteHeader = () => {
                         <a
                           className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
                           href={
-                            "https://themeforest.net/item/chisfis-online-booking-react-template/33515927"
+                            "##"
                           }
                           target="_blank"
                           rel="noopener noreferrer"
@@ -197,25 +197,26 @@ const SiteHeader = () => {
         ? ""
         : "shadow-sm dark:border-b dark:border-neutral-700";
     }
-    switch (headerSelected) {
-      case "Header 1":
-        return <Header className={headerClassName} navType="MainNav1" />;
-      case "Header 2":
-        return <Header className={headerClassName} navType="MainNav2" />;
-      case "Header 3":
-        return <Header3 className={headerClassName} />;
+    return <Header className={headerClassName} navType="MainNav1" />
+    // switch (headerSelected) {
+    //   case "Header 1":
+    //     return <Header className={headerClassName} navType="MainNav1" />;
+    //   case "Header 2":
+    //     return <Header className={headerClassName} navType="MainNav2" />;
+    //   case "Header 3":
+    //     return <Header3 className={headerClassName} />;
 
-      default:
-        return <Header3 className={headerClassName} />;
-    }
+    //   default:
+    //     return <Header3 className={headerClassName} />;
+    // }
   };
 
   return (
     <>
       <Helmet>
-        <title>Chisfis || Booking React Template</title>
+        <title>ATE - AnyTimeEat</title>
       </Helmet>
-      {renderControlSelections()}
+      {/* {renderControlSelections()} */}
       {renderHeader()}
       <div ref={anchorRef} className="h-1 absolute invisible"></div>
     </>

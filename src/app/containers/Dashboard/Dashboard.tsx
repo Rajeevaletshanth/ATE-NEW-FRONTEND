@@ -6,6 +6,8 @@ import SectionSliderNewCategories from "./components/SectionSliderNewCategories/
 import SectionSliderNewCategoriesDifferentCard from "./components/SectionSliderNewCategories/SectionSliderNewCategoriesDifferentCard";
 import "../../css/main.css"
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { addToCart } from "store/cart/itemsSlice";
 //API
 import { getTopBrandsApi, getAllRestaurantApi, getAllProductsApi, getAllCombosApi, getCuisinesApi, getTopOfferssApi } from 'services/apiServices'
 import CardCategory1 from "components/StayCard/StayCard";
@@ -113,13 +115,19 @@ const OFFER_CAT : TaxonomyType[] = [
 ];
 
 const Dashboard = () => {
-
+  
   const [topBrands, setTopBrands] = useState<any>([]);
   const [topOffers, setTopOffers] = useState<any>([]);
   const [allRestaurants, setAllRestaurants] = useState<any>([]);
   const [allProducts, setAllProducts] = useState<any>([]);
   const [allCombo, setAllCombo] = useState<any>([]);
   const [allCuisines, setAllCuisines] = useState<any>([]);
+
+  const dispatch = useDispatch();
+
+  const addProduct = (data:any) => {
+    dispatch(addToCart(data))
+  }
 
   const getTopBrands = async() => {
       setTopBrands([])
@@ -186,6 +194,7 @@ const Dashboard = () => {
           return[
             ...s,{
               id: item.id,
+              type: "product",
               href: `/product/${item.id}`,
               name: item.name,
               desc: item.description,
@@ -212,6 +221,7 @@ const Dashboard = () => {
           return[
             ...s,{
               id: item.id,
+              type: "combo",
               href: `/combo/${item.id}`,
               name: item.name,
               desc: item.description,
@@ -323,6 +333,7 @@ const Dashboard = () => {
                         subHeading="Good food is always cooking! Go ahead, order some yummy items from the menu"
                         sliderStyle="style2"
                         uniqueClassName="PageHome_s2"
+                        addProduct={addProduct}
                     />
         </div>:<></>}
 
@@ -337,6 +348,7 @@ const Dashboard = () => {
                           subHeading="Good food is always cooking! Go ahead, order some yummy items from the menu"
                           sliderStyle="style2"
                           uniqueClassName="PageHome_s2"
+                          addProduct={addProduct}
                       />
           </div>
         </div>:<></>}

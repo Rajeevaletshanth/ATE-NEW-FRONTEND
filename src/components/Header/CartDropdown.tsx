@@ -1,35 +1,18 @@
-import React, { FC, useState } from "react";
-import AnyReactComponent from "components/AnyReactComponent/AnyReactComponent";
-import StayCardH from "./components/StayCardH/StayCardH";
-import GoogleMapReact from "google-map-react";
-import { DEMO_STAY_LISTINGS } from "data/listings";
-import ButtonClose from "shared/ButtonClose/ButtonClose";
-import Checkbox from "shared/Checkbox/Checkbox";
-import Pagination from "shared/Pagination/Pagination";
-import TabFilters from "./TabFilters";
-import Heading from "components/Heading/Heading";
-import NcImage from "shared/NcImage/NcImage";
-import StartRating from "components/StartRating/StartRating";
-import NumberInput from "./components/NumberInput/NumberInput";
-import { ShoppingBagIcon } from "@heroicons/react/24/solid";
-
+import { Popover, Transition } from "@headlessui/react";
+import React, { FC, Fragment, useEffect } from "react";
 import Avatar from "shared/Avatar/Avatar";
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { BsCartX } from 'react-icons/bs';
 import ButtonPrimary from "shared/Button/ButtonPrimary";
+import NumberInput from "./NumberInput/NumberInput";
 import { useDispatch, useSelector } from 'react-redux';
 import { increaseProductQuantity, decreaseProductQuantity, removeFromCart } from "store/cart/itemsSlice";
 
+interface Props {
+  className?: string;
+}
 
-
-const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
-
-export interface SectionGridHasMapProps { }
-
-const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
-  const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
-  const [showFullMapFixed, setShowFullMapFixed] = useState(false);
-
+const NotifyDropdown: FC<Props> = ({ className = "" }) => {
   const { products } = useSelector((state: any) => state.cart.items)
   const dispatch = useDispatch();
 
@@ -45,38 +28,35 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
     dispatch(removeFromCart({id: id, type: type}));
   }
 
+  // const 
   return (
-    <div>
-      <div className="relative flex min-h-screen">
-        <div className="min-h-screen w-full xl:w-[780px] 2xl:w-[800px] flex-shrink-0 xl:px-8 ">
-          <Heading children="Recommended" desc="24 items" />
-          <div className="mb-4 lg:mb-4">
-            <TabFilters />
-          </div>
-
-          <div className="grid grid-cols-1 gap-8">
-            {DEMO_STAYS.map((item) => (
-              <div
-                key={item.id}
-                onMouseEnter={() => setCurrentHoverID((_) => item.id)}
-                onMouseLeave={() => setCurrentHoverID((_) => -1)}
-              >
-                <StayCardH data={item} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Cart */}
-        <div
-          className={`xl:flex-grow xl:static xl:block w-full ${showFullMapFixed ? "fixed inset-0 z-50" : "hidden"
-            }`}
-        >
-
-          <div className="fixed xl:sticky top-10 xl:top-[88px] left-0 w-full h-full xl:h-[calc(100vh-88px)] rounded-md overflow-hidden py-3 ">
-            {/* <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-2 sm:space-y-2 px-0 sm:p-6 xl:p-4 "> */}
-              {/*  */}
-              <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 ">
+    <div className={className}>
+      <Popover className="relative">
+        {({ open }) => (
+          <>
+            <Popover.Button
+              className={` ${
+                open ? "" : "text-opacity-90"
+              } group p-3 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex products-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative`}
+            >
+              {products.length > 0 && 
+              <span className="w-4 h-4 bg-primary-500 text-gray-50 absolute top-1 right-1 rounded-full text-xs flex justify-center items-center">
+                {products.length}
+              </span>
+              }
+              <RiShoppingCartLine size={23} />
+            </Popover.Button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-200"
+              enterFrom="opacity-0 translate-y-1"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 translate-y-1"
+            >
+              <Popover.Panel className="absolute z-10 w-screen max-w-xs sm:max-w-sm px-4 mt-3 -right-28 sm:right-0 sm:px-0">
+                <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 ">
                 
                   <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-3" >                 
                     <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-4 overflow:p-7 overflow-x-hidden overflow-y-auto" style={{ maxHeight:"500px" }}>
@@ -113,13 +93,13 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
                     {products.length > 0 && <ButtonPrimary sizeClass="p-2 rounded-xl" >Checkout</ButtonPrimary>}
                   </div>
                 </div>
-              {/*  */}
-            {/* </div> */}
-          </div>
-        </div>
-      </div>
+              </Popover.Panel>
+            </Transition>
+          </>
+        )}
+      </Popover>
     </div>
   );
 };
 
-export default SectionGridHasMap;
+export default NotifyDropdown;
