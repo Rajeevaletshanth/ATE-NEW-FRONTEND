@@ -7,7 +7,7 @@ import SectionSliderNewCategories from "components/SectionSliderNewCategories/Se
 import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
 import SectionGridHasMap from "./SectionGridHasMap";
 import { Helmet } from "react-helmet";
-import RestaurauntHero from "./components/RestaurauntHero/RestaurauntHero";
+import RestaurantHero from "./components/RestaurantHero/RestaurantHero";
 
 export interface ListingStayMapPageProps {
   className?: string;
@@ -29,7 +29,7 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
 
       {/* SECTION HERO */}
       <div className="container relative space-y-5 mb-5 mt-5 lg:space-y-5 lg:mb-5">
-        <RestaurauntHero />
+        <RestaurantHero />
         
       </div>
       

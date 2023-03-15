@@ -54,11 +54,12 @@ import useWindowSize from "hooks/useWindowResize";
 
 import Dashboard from "app/containers/Dashboard/Dashboard";
 import Restaurant from "app/containers/Restaurant/Restaurant";
+import AllRestaurant from "app/containers/Restaurant/AllRestaurant";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: Dashboard },
   { path: "/#", exact: true, component: Dashboard },
-  { path: "/restaurant", exact: true, component: Restaurant },
+  { path: "/restaurant", exact: true, component: AllRestaurant },
   { path: "/restaurant/:id", exact: false, component: Restaurant },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },

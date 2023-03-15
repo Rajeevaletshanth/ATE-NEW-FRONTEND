@@ -8,11 +8,11 @@ import StartRating from "components/StartRating/StartRating";
 import NcImage from "shared/NcImage/NcImage";
 import { HiOutlineAtSymbol, HiPhone } from "react-icons/hi";
 
-export interface RestaurauntHeroProps {
+export interface RestaurantHeroProps {
   className?: string;
 }
 
-const RestaurauntHero: FC<RestaurauntHeroProps> = ({ className = "" }) => {
+const RestaurantHero: FC<RestaurantHeroProps> = ({ className = "" }) => {
   return (
     <div
       className={`nc-SectionHeroArchivePage flex flex-col relative ${className}`}
@@ -53,4 +53,4 @@ const RestaurauntHero: FC<RestaurauntHeroProps> = ({ className = "" }) => {
   );
 };
 
-export default RestaurauntHero;
+export default RestaurantHero;
