@@ -9,6 +9,9 @@ export const itemsSlice = createSlice({
       const productIndex = state.products.findIndex(product => product.id === newProduct.id && product.type === newProduct.type);
       if (productIndex !== -1) {
         state.products[productIndex].quantity++;
+        if (newProduct.addons && newProduct.addons.length > 0) {
+          state.products[productIndex].addons = newProduct.addons;
+        }
       } else {
         state.products.push({ ...newProduct, quantity: 1 });
       }
@@ -31,6 +34,13 @@ export const itemsSlice = createSlice({
         }
       }
     },
+    editProductAddonsById: (state, action) => {
+      const { id, type, addons } = action.payload;
+      const productIndex = state.products.findIndex(product => product.id === id && product.type === type);
+      if (productIndex !== -1) {
+        state.products[productIndex].addons = addons;
+      }
+    },
     removeFromCart: (state, action) => {
         const { id, type } = action.payload;
         const productIndex = state.products.findIndex(product => product.id === id && product.type === type);
@@ -44,6 +54,6 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { addToCart, increaseProductQuantity, decreaseProductQuantity, removeFromCart, emptyCart } = itemsSlice.actions;
+export const { addToCart, increaseProductQuantity, decreaseProductQuantity, editProductAddonsById, removeFromCart, emptyCart } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

@@ -33,8 +33,15 @@ hr {
     margin: 0 auto;
   }
 
+
+
 .darkSecondary{
   background-color: #101625;
+}
+
+.swal-confirm{
+  background-color: rgba(218, 0, 0, 1);
+  color: white;
 }
 
 /* .dashboard-bg::before {

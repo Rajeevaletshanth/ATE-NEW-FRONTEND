@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StayDataType, ProductsType } from "data/types";
+import { StayDataType, ProductsType, AddToCartType } from "data/types";
 import StartRating from "components/StartRating/StartRating";
 import { Link } from "react-router-dom";
 import BtnLikeIcon from "components/BtnLikeIcon/BtnLikeIcon";
@@ -7,20 +7,19 @@ import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import NcImage from "shared/NcImage/NcImage";
 import Button from "shared/Button/Button";
+import AddToCart from "components/AddToCart/AddToCart";
 
 export interface StayCardProps {
   className?: string;
   data?: StayDataType;
   size?: "default" | "small";
-  card_data: ProductsType;
-  addProduct:(data:any) => void
+  card_data: any;
 }
 
 const StayCard: FC<StayCardProps> = ({
   size = "default",
   className = "",
-  card_data,
-  addProduct
+  card_data
 }) => {
   const {
     id,
@@ -36,20 +35,19 @@ const StayCard: FC<StayCardProps> = ({
     vegetarian,
     addons
   } = card_data
-  
-  const addProductToCart = () => {
-    addProduct({
-      id: id,
-      type: type,
-      name: name,
-      restaurant_id: restaurant_id,
-      addons: addons,
-      vegetarian: vegetarian,
-      avatar: thumbnail,
-      price: price,
-      description: desc
-    })
+
+  const addToCartData = {
+    id: id,
+    type: type,
+    name: name,
+    restaurant_id: restaurant_id,
+    available_addons: addons,
+    vegetarian: vegetarian,
+    avatar: thumbnail,
+    price: price,
+    description: desc
   }
+  
   const renderSliderGallery = () => {
     return (
       <div className=" w-full">
@@ -119,7 +117,7 @@ const StayCard: FC<StayCardProps> = ({
         <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
         <div className="flex justify-between items-center">
           <span className="text-base font-semibold">
-            ${price}
+            € {price}
             {/* {size === "default" && (
               <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
                 /night
@@ -131,7 +129,7 @@ const StayCard: FC<StayCardProps> = ({
           {/* // )} */}
         </div>
         <div className="flex justify-center">
-            <Button className="bg-primary-400 text-gray-100 hover:bg-primary-500" fontSize="text-xs sm:text-sm font-medium" sizeClass="px-8 py-2 sm:px-8" onClick={addProductToCart}>Add to Cart</Button>
+          <AddToCart data={addToCartData}/>
         </div>
 
       </div>

@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import AnyReactComponent from "components/AnyReactComponent/AnyReactComponent";
-import StayCardH from "./components/StayCardH/StayCardH";
+import ProductCard from "./components/StayCardH/ProductCard";
 import GoogleMapReact from "google-map-react";
 import { DEMO_STAY_LISTINGS } from "data/listings";
 import ButtonClose from "shared/ButtonClose/ButtonClose";
@@ -24,11 +24,29 @@ import { increaseProductQuantity, decreaseProductQuantity, removeFromCart } from
 
 const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
 
-export interface SectionGridHasMapProps { }
+export interface RestaurantProductsProps { 
+  categoryList: any[];
+  allProducts: any[];
+  allCombo: any[];
+}
 
-const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
+const RestaurantProducts: FC<RestaurantProductsProps> = ({
+  categoryList,
+  allProducts,
+  allCombo
+}) => {
+
   const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
-  const [showFullMapFixed, setShowFullMapFixed] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+
+  const [filteredArray, setFilteredArray] = useState<any>([]);
+
+  const [selectedType, setSelectedType] = useState<any>({label: "Products", name: "product"})
+  const [selectedItem, setSelectedItem] = useState<any>({id: categoryList[0].id, name: categoryList[0].name})
+
+  const handleSelected = (item: any) => {
+    setSelectedItem({id: item.id, name:item.name})
+  }
 
   const { products } = useSelector((state: any) => state.cart.items)
   const dispatch = useDispatch();
@@ -45,31 +63,49 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
     dispatch(removeFromCart({id: id, type: type}));
   }
 
+  useEffect(() => {
+    let items;
+    if(selectedType.name == "product"){
+      if(selectedItem.id == -1)
+        items = allProducts
+      else
+        items = allProducts.filter(item => item.category_id == selectedItem.id)
+    }else{
+      items = allCombo
+    }  
+    setFilteredArray(items)
+  },[selectedType, selectedItem])
+
   return (
     <div>
       <div className="relative flex min-h-screen">
         <div className="min-h-screen w-full xl:w-[780px] 2xl:w-[800px] flex-shrink-0 xl:px-8 ">
-          <Heading children="Recommended" desc="24 items" />
-          {/* <div className="mb-4 lg:mb-4">
-            <TabFilters />
-          </div> */}
+          <Heading 
+            isCenter={true} 
+            children={selectedType.name === "combo" ? "Combo Menu" : selectedItem.name} 
+            // desc={filteredArray.length === 1? `1 item` :`${filteredArray.length} items`} 
+          />
+          <div className="mb-4 lg:mb-4">
+            <TabFilters categoryList={categoryList} selectedItem={selectedItem.name} selectedType={selectedType.label} setSelectedType={setSelectedType} handleSelected={handleSelected}/>
+          </div>
 
           <div className="grid grid-cols-1 gap-8">
-            {DEMO_STAYS.map((item) => (
-              <div
-                key={item.id}
-                onMouseEnter={() => setCurrentHoverID((_) => item.id)}
-                onMouseLeave={() => setCurrentHoverID((_) => -1)}
-              >
-                <StayCardH data={item} />
-              </div>
-            ))}
+            {filteredArray.map((item:any) => (
+                <div
+                  key={item.id}
+                  // onMouseEnter={() => setCurrentHoverID((_) => item.id)}
+                  // onMouseLeave={() => setCurrentHoverID((_) => -1)}
+                >
+                  <ProductCard data={item}/>
+                </div>
+              ))
+            }
           </div>
         </div>
 
         {/* Cart */}
         <div
-          className={`xl:flex-grow xl:static xl:block w-full ${showFullMapFixed ? "fixed inset-0 z-50" : "hidden"
+          className={`xl:flex-grow xl:static xl:block w-full ${showCart ? "fixed inset-0 z-50" : "hidden"
             }`}
         >
 
@@ -122,4 +158,4 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   );
 };
 
-export default SectionGridHasMap;
+export default RestaurantProducts;

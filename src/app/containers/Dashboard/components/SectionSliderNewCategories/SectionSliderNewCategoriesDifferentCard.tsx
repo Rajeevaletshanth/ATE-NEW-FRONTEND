@@ -20,7 +20,6 @@ export interface SectionSliderNewCategoriesProps {
   itemPerRow?: 4 | 5;
   sliderStyle?: "style1" | "style2";
   uniqueClassName: string;
-  addProduct:(data: any) => void
 }
 
 
@@ -33,8 +32,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   itemPerRow = 5,
   categoryCardType = "card2",
   sliderStyle = "style1",
-  uniqueClassName,
-  addProduct
+  uniqueClassName
 }) => {
   const UNIQUE_CLASS =
     "SectionSliderNewCategories__" + uniqueClassName + useNcId();
@@ -75,7 +73,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   }, [MY_GLIDEJS, UNIQUE_CLASS]);
 
   const renderCard = (item: ProductsType, index: number) => {
-    return <StayCard card_data={item} addProduct={addProduct}/>
+    return <StayCard card_data={item} />
   };
 
   return (

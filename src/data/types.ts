@@ -19,6 +19,19 @@ export interface TaxonomyType {
   listingType?: "stay" | "experiences" | "car";
 }
 
+export interface AddToCartType {
+  id: string | number,
+  type: string,
+  name: string,
+  restaurant_id: string | number,
+  addons?: any[],
+  available_addons?: any[],
+  vegetarian?: boolean,
+  avatar: string,
+  price: string,
+  description?: string
+}
+
 export interface ProductsType {
   id: string | number;
   name: string;

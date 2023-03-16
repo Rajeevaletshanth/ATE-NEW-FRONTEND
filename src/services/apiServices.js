@@ -81,6 +81,17 @@ export const getAllRestaurantApi = () => {
     })
 }
 
+//Restaurant by ID
+export const getRestaurantApi = (id) => {
+    return new Promise((resolve,reject) =>{
+        axios.get(`${config.SERVER_URL}/restaurant/${id}`).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
+
 //Top Offers
 export const getCuisinesApi = () => {
     return new Promise((resolve,reject) =>{
@@ -92,3 +103,24 @@ export const getCuisinesApi = () => {
     })
 }
 
+//Category
+export const getCategoriesApi = (restaurant_id) => {
+    return new Promise((resolve,reject) =>{
+        axios.get(`${config.SERVER_URL}/category/restaurant/${restaurant_id}`).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
+
+//Get Addons by multiple ids
+export const getAddonsByIds = (data) => {
+    return new Promise((resolve,reject) =>{
+        axios.post(`${config.SERVER_URL}/addons/multiple`, data).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}

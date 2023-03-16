@@ -46,6 +46,6 @@ export const injectReducer = (key, reducer) => {
 	store.replaceReducer(persistedReducer);
 	persistor.persist();
 	return store;
-  };
+};
 
 export default store
