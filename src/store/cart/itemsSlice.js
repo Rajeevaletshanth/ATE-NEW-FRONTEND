@@ -8,13 +8,20 @@ export const itemsSlice = createSlice({
       const newProduct = action.payload;
       const productIndex = state.products.findIndex(product => product.id === newProduct.id && product.type === newProduct.type);
       if (productIndex !== -1) {
-        state.products[productIndex].quantity++;
-        if (newProduct.addons && newProduct.addons.length > 0) {
-          state.products[productIndex].addons = newProduct.addons;
-        }
+        state.products[productIndex].addons = newProduct.addons;
+        // state.products[productIndex].quantity++;
+        // if (newProduct.addons && newProduct.addons.length > 0) {
+          // state.products[productIndex].addons = newProduct.addons;
+        // }
       } else {
         state.products.push({ ...newProduct, quantity: 1 });
       }
+      // if(productIndex !== -1){
+      //   state.products.push({ ...newProduct });
+      // }else{
+      //   state.products.push({ ...newProduct, quantity: 1 });
+      // }
+      
     },
     increaseProductQuantity: (state, action) => {
       const { id, type } = action.payload;

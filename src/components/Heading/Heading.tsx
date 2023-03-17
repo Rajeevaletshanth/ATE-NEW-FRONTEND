@@ -27,7 +27,7 @@ const Heading: React.FC<HeadingProps> = ({
           isCenter ? "text-center w-full max-w-2xl mx-auto " : "max-w-2xl text-center"
         }
       >
-        <h2 className={`text-3xl md:text-4xl font-semibold `} {...args}>
+        <h2 className={`text-3xl md:text-4xl font-semibold `}  {...args}>
           {children || `Section Heading`}
         </h2>
         {underline && <hr className={`flex justify-center mt-2 `}/>}

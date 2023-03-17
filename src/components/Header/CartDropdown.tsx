@@ -7,6 +7,7 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import NumberInput from "./NumberInput/NumberInput";
 import { useDispatch, useSelector } from 'react-redux';
 import { increaseProductQuantity, decreaseProductQuantity, removeFromCart } from "store/cart/itemsSlice";
+import AddToCart from "components/AddToCart/AddToCart";
 
 interface Props {
   className?: string;
@@ -73,10 +74,22 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
                               <p className="text-sm font-medium text-gray-900 dark:text-gray-200">
                                 {item.name}
                               </p>
-                              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                              {/* <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                 {item.description}
-                              </p>
-                              <span className="text-xs bg-green-100 text-green-900 rounded px-1 text-center mr-3">€ {item.price}</span>
+                              </p> */}
+                              <span className="text-xs bg-green-100 text-green-900 rounded px-1 text-center mr-3">Unit Price : € {item.price}</span>
+                              {/* {item.available_addons && item.available_addons.length > 0 && <AddToCart data={item} editAddon={true}/>} */}
+                              {item.addons && item.addons.length > 0 && <>
+                                <div className="flex flex-row flex-wrap text-xs">
+                                  Addons : 
+                                  {item.addons.map((addon:any) => {
+                                    return(
+                                      <p className="text-xs bg-primary-400 rounded px-1 text-white ml-1 mr-1 mb-1"> {addon.label}</p>
+                                    )
+                                  })} 
+                                </div>
+                                </>
+                              }
 
                               <NumberInput label="Quantity" defaultValue={item.quantity} min={1} id={item.id} type={item.type} addQuantity={addQuantity} minusQuantity={minusQuantity}/>
 

@@ -183,7 +183,7 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
 
         {/* SECTION */}
         <div className="container relative space-y-5 mb-5 mt-5 lg:space-y-5 lg:mb-5">
-          <RestaurantProducts allProducts={allProducts} allCombo={allCombo} categoryList={allCategory} />
+          <RestaurantProducts allProducts={allProducts} allCombo={allCombo} categoryList={allCategory} restaurant_id={Number(id)} restaurantData={restaurantData}/>
         </div>
         </>
         : 

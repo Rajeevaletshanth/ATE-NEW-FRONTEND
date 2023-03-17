@@ -4,11 +4,11 @@ import { addToCart, editProductAddonsById } from "store/cart/itemsSlice";
 import { AddToCartType } from 'data/types';
 import Button from 'shared/Button/Button';
 
-export interface AddAddonsProps {
+export interface EditAddonsProps {
     data: AddToCartType;
 }
 
-const AddAddons: FC<AddAddonsProps> =  ({
+const EditAddons: FC<EditAddonsProps> =  ({
     data
 }) =>{
     const dispatch = useDispatch();
@@ -22,4 +22,4 @@ const AddAddons: FC<AddAddonsProps> =  ({
   )
 }
 
-export default AddAddons
+export default EditAddons

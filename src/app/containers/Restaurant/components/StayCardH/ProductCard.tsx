@@ -34,7 +34,7 @@ const ProductCard: FC<ProductCardProps> = ({
     type
   } = data;
 
-
+ 
   const addToCartData = {
       id: id,
       type: type,
@@ -90,7 +90,7 @@ const ProductCard: FC<ProductCardProps> = ({
           </span>
         </div>
         <div className="flex  mt-4">
-          <AddToCart data={addToCartData}/>
+          <AddToCart data={addToCartData} />
             {/* <Button className="bg-primary-400 text-gray-100 hover:bg-primary-500 rounded-lg" fontSize="text-sm sm:text-sm font-medium" sizeClass="px-14 py-3 sm:px-14" onClick={addProductToCart}>Add to Cart</Button> */}
         </div>
       </div>
