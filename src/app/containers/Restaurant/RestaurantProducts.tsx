@@ -176,8 +176,7 @@ const RestaurantProducts: FC<RestaurantProductsProps> = ({
                               </p> */}
                               <span className="text-sm bg-green-100 text-green-900 rounded px-1 text-center mr-3">Unit Price : € {item.price}</span>
 
-                              <NumberInput label="Quantity" defaultValue={item.quantity} min={1} id={item.id} type={item.type} addQuantity={addQuantity} minusQuantity={minusQuantity}/>
-                              {item.available_addons && item.available_addons.length > 0 && <AddToCart data={item} editAddon={true}/>}
+                              
                               {item.addons && item.addons.length > 0 && <>
                                 <div className="flex flex-row flex-wrap text-xs">
                                   Addons : 
@@ -189,6 +188,8 @@ const RestaurantProducts: FC<RestaurantProductsProps> = ({
                                 </div>
                                 </>
                               }
+                              <NumberInput label="Quantity" defaultValue={item.quantity} min={1} id={item.id} type={item.type} addQuantity={addQuantity} minusQuantity={minusQuantity}/>
+                              {item.available_addons && item.available_addons.length > 0 && <AddToCart data={item} editAddon={true}/>}
                             </div>
                               <span style={{cursor:"pointer"}} className="w-5 h-5 bg-gray-50 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-900 absolute top-2 right-2 rounded-full text-xs flex justify-center items-center" onClick={() => removeProduct(item.id, item.type)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500" viewBox="0 0 20 20" fill="currentColor">

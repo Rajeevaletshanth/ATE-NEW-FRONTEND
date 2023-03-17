@@ -1,5 +1,5 @@
 import { Popover, Transition } from "@headlessui/react";
-import React, { FC, Fragment, useEffect } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import Avatar from "shared/Avatar/Avatar";
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { BsCartX } from 'react-icons/bs';
@@ -16,6 +16,7 @@ interface Props {
 const NotifyDropdown: FC<Props> = ({ className = "" }) => {
   const { products } = useSelector((state: any) => state.cart.items)
   const dispatch = useDispatch();
+  const [total, setTotal] = useState<number>(0)
 
   const addQuantity = (id:number, type:string) => {
     dispatch(increaseProductQuantity({id: id, type: type}));
@@ -28,6 +29,24 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
   const removeProduct = (id:number, type:string) => {
     dispatch(removeFromCart({id: id, type: type}));
   }
+
+  useEffect(() => {
+    if(products?.length > 0){
+      let tempPrice = 0;
+      products.map((item:any) => { 
+          let itemPrice = 0;
+          let addonPrice = 0;         
+          itemPrice = item.price;
+          if(item.addons && item.addons.length > 0){
+            item.addons.map((addon:any) => {
+              addonPrice += addon.price
+            })
+          }
+          tempPrice += (itemPrice + addonPrice)*item.quantity
+      })
+      setTotal(tempPrice)
+    }
+  },[products])
 
   // const 
   return (
@@ -59,7 +78,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
               <Popover.Panel className="absolute z-10 w-screen max-w-xs sm:max-w-sm px-4 mt-3 -right-28 sm:right-0 sm:px-0">
                 <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 ">
                 
-                  <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-3" >                 
+                  <div className="relative grid bg-white dark:bg-neutral-800 p-3" >                 
                     <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-4 overflow:p-7 overflow-x-hidden overflow-y-auto" style={{ maxHeight:"500px" }}>
                     {products.length === 0 && <div className="flex justify-center items-center"><BsCartX size={20} className="w-12 h-12 mr-2 text-primary-500"/>Cart is empty!</div>}
                     {products?.map((item: any, index: number) => (
@@ -103,7 +122,10 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
                       </a>
                     ))}
                     </div>
-                    {products.length > 0 && <ButtonPrimary sizeClass="p-2 rounded-xl" >Checkout</ButtonPrimary>}
+                    {products.length > 0 && <>
+                      <p className="text-lg font-light text-center px-3 mt-4"><b>Total : € {total}</b></p>
+                      <hr className=" small-hr"/>
+                    <ButtonPrimary sizeClass="p-2 rounded-xl mt-3" >Checkout</ButtonPrimary></>}
                   </div>
                 </div>
               </Popover.Panel>

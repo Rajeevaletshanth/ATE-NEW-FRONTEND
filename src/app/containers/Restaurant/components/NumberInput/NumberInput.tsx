@@ -54,7 +54,7 @@ const NumberInput: FC<NumberInputProps> = ({
   const renderLabel = () => {
     return (
       <div className="flex flex-col">
-        <span className="text-sm text-neutral-800 dark:text-neutral-200">
+        <span className="text-xs text-neutral-800 dark:text-neutral-200">
           {label}
         </span>
         {desc && (

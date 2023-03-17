@@ -79,7 +79,11 @@ const AddToCart: FC<AddToCartProps> =  ({
       };
 
     const handleAddons = (addonArray: any) => {
-        let selectedArray: any = selectedAddon;
+        let selectedArray: any = [];
+        if(inCart){
+            selectedArray = selectedAddon;
+        }
+         
         let tempArray: any = [];
         let uniqueArray: any = [];
         MySwal.fire<Option[]>({
@@ -130,16 +134,18 @@ const AddToCart: FC<AddToCartProps> =  ({
           }
         }).then((result: SweetAlertResult<Option[]>) => {
           if (result.isConfirmed) {
-            // uniqueArray = Array.from(new Set(selectedArray.map((item:any) => item.id))).map((id) => {
-            //     return selectedArray.find((item:any) => item.id === id)
-            // });
+            if(selectedArray && selectedArray.length > 0){
+                uniqueArray = Array.from(new Set(selectedArray.map((item:any) => item.id))).map((id) => {
+                    return selectedArray.find((item:any) => item.id === id)
+                });
+            }
             setAdded(true)
             dispatch(addToCart({
                 id: data.id,
                 type: data.type,
                 name: data.name,
                 restaurant_id: data.restaurant_id,
-                addons: selectedArray,
+                addons: uniqueArray,
                 available_addons: data.available_addons,
                 vegetarian: data.vegetarian,
                 avatar: data.avatar,
