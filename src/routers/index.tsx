@@ -55,6 +55,7 @@ import useWindowSize from "hooks/useWindowResize";
 import Dashboard from "app/containers/Dashboard/Dashboard";
 import Restaurant from "app/containers/Restaurant/Restaurant";
 import AllRestaurant from "app/containers/Restaurant/AllRestaurant";
+import Checkout from "app/containers/Checkout/Checkout";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: Dashboard },
@@ -91,7 +92,7 @@ export const pages: Page[] = [
 
   // { path: "/listing-flights", component: ListingFlightsPage },
 
-  { path: "/checkout", component: CheckOutPage },
+  { path: "/checkout", component: Checkout },
   // { path: "/pay-done", component: PayPage },
 
   // { path: "/author", component: AuthorPage },
