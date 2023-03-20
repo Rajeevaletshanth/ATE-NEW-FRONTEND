@@ -108,7 +108,7 @@ const PaymentCardModal:FC <PaymentCardProps> = ({refresh, setRefresh}) => {
                 </div>
                 <div className='p-2 text-left'>
                     <label  className='ml-3 font-semibold text-sm'>Credit Card Number</label>
-                    <Input type="text"  onChange={(e) => setCardNumber(e.target.value)} minLength={16} maxLength={17} placeholder="•••• •••• •••• 4242"/>
+                    <Input type="text"  onChange={(e) => setCardNumber(e.target.value)} minLength={16} maxLength={20} placeholder="•••• •••• •••• 4242"/>
                 </div>
                 <div className="flex flex-row">
                     <div className='p-2 text-left'>
