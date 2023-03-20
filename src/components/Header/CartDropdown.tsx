@@ -125,7 +125,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
                     {products.length > 0 && <>
                       <p className="text-lg font-light text-center px-3 mt-4"><b>Total : € {total}</b></p>
                       <hr className=" small-hr"/>
-                    <ButtonPrimary sizeClass="p-2 rounded-xl mt-3" >Checkout</ButtonPrimary></>}
+                    <ButtonPrimary  href={`/checkout`} sizeClass="p-2 rounded-xl mt-3" >Checkout</ButtonPrimary></>}
                   </div>
                 </div>
               </Popover.Panel>

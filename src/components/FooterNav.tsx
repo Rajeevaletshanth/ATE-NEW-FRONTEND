@@ -25,7 +25,7 @@ const NAV: NavItem[] = [
   },
   {
     name: "Wishlists",
-    link: "/account-savelists",
+    link: "/savelists",
     icon: HeartIcon,
   },
   {

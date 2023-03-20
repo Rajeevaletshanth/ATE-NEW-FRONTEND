@@ -16,7 +16,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-AccountPage ${className}`} data-nc-id="AccountPage">
       <Helmet>
-        <title>Account || Booking React Template</title>
+        <title>Account - AnyTimeEat</title>
       </Helmet>
       <CommonLayout>
         <div className="pt-1 pb-1 bg-gray-100 dark:bg-neutral-800 rounded-2xl">

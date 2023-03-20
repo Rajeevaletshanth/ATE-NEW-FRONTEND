@@ -8,7 +8,6 @@ const header=()=>{
             'Authorization':`Bearer ${token}`
         }
     }
-    
 }
 
 export const getAvatar = (avatar) => {

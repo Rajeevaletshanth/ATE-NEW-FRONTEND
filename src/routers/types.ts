@@ -31,9 +31,9 @@ export interface LocationStates {
   "/pay-done"?: {};
   //
   "/account"?: {};
-  "/account-savelists"?: {};
-  "/account-password"?: {};
-  "/account-billing"?: {};
+  "/savelists"?: {};
+  "/password-settings"?: {};
+  "/billing"?: {};
   "/favourite"?: {};
   "/manage-address"?: {};
   "/myorders"?: {};

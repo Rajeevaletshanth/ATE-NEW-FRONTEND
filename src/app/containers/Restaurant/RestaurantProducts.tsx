@@ -20,6 +20,7 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import { useDispatch, useSelector } from 'react-redux';
 import { increaseProductQuantity, decreaseProductQuantity, removeFromCart } from "store/cart/itemsSlice";
 import AddToCart from "components/AddToCart/AddToCart";
+import { Link } from "react-router-dom";
 
 
 
@@ -202,7 +203,7 @@ const RestaurantProducts: FC<RestaurantProductsProps> = ({
                     {restaurantProducts.length > 0 && <>
                       <p className="text-xl font-light text-center px-3 mt-4"><b>Sub Total : € {subTotal}</b></p>
                       <hr className=" small-hr"/>
-                      <ButtonPrimary sizeClass="p-2 rounded-xl mt-4" >Checkout</ButtonPrimary>
+                      <ButtonPrimary href={`/checkout`} sizeClass="p-2 rounded-xl mt-4">Checkout</ButtonPrimary>
                     </>
                     }
                   </div>

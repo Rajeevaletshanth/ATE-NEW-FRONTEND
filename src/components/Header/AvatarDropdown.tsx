@@ -16,7 +16,7 @@ import useAuth from 'utils/hooks/useAuth'
 const solutions = [
   {
     name: "Account",
-    href: "/author",
+    href: "/account",
     icon: UserCircleIcon,
   },
   // {
