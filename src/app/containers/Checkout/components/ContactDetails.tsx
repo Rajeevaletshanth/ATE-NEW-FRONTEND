@@ -9,7 +9,7 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 const ContactDetails = () => {
     return (
         <>
-            <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8 mb-8">
+            <div className="w-full flex flex-col sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-6 xl:p-8 mb-8 mt-10">
                 <div>
                     <h3 className="text-2xl font-semibold">Contact Details</h3>
                     <div className="w-14 border-b border-neutral-200 dark:border-neutral-700 my-5"></div>
