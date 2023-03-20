@@ -18,19 +18,7 @@ const CardCategory: FC<CardCategoryProps> = ({
   taxonomy,
 }) => {
   const { count, card_holder_name, card_type, last_four_digits, href = "/", thumbnail } = taxonomy;
-  const [type, setType] = useState<any>(visa)
 
-  useEffect(() => {
-    if(card_type === "visa"){
-        setType(visa)
-    }else if(card_type === "mastercard"){
-        setType(master)
-    }else if(card_type === "amex"){
-        setType(amex)
-    }else{
-        setType(discover)
-    }
-  },[card_type])
   return (
     <Link
       to={href}
@@ -41,7 +29,7 @@ const CardCategory: FC<CardCategoryProps> = ({
         containerClassName={`flex-shrink-0 ${
           size === "large" ? "w-24 h-20" : "w-18 h-12"
         } rounded-lg mr-4 overflow-hidden`}
-        src={type}
+        src={card_type === "visa"? visa : card_type === "mastercard"? master : card_type === "amex"? amex : discover}
       />
       <div>
         <h2

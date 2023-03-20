@@ -37,10 +37,20 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
           let itemPrice = 0;
           let addonPrice = 0;         
           itemPrice = item.price;
-          if(item.addons && item.addons.length > 0){
-            item.addons.map((addon:any) => {
-              addonPrice += addon.price
-            })
+          if(item.addons){
+            if(typeof item.addons === "object"){
+              if(item.addons.length > 0){
+                item.addons.map((addon:any) => {
+                  addonPrice += addon.price
+                })
+              }
+            }else{
+              if(JSON.parse(item.addons).length > 0){
+                JSON.parse(item.addons).map((addon:any) => {
+                  addonPrice += addon.price
+                })
+              }
+            }
           }
           tempPrice += (itemPrice + addonPrice)*item.quantity
       })
@@ -98,14 +108,21 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
                               </p> */}
                               <span className="text-xs bg-green-100 text-green-900 rounded px-1 text-center mr-3">Unit Price : € {item.price}</span>
                               {/* {item.available_addons && item.available_addons.length > 0 && <AddToCart data={item} editAddon={true}/>} */}
-                              {item.addons && item.addons.length > 0 && <>
+                              {item.addons &&  <>
                                 <div className="flex flex-row flex-wrap text-xs">
                                   Addons : 
-                                  {item.addons.map((addon:any) => {
+                                  {typeof item.addons === "object" ? 
+                                  item.addons.map((addon:any) => {
                                     return(
                                       <p className="text-xs bg-primary-400 rounded px-1 text-white ml-1 mr-1 mb-1"> {addon.label}</p>
                                     )
-                                  })} 
+                                  }):
+                                  JSON.parse(item.addons).map((addon:any) => {
+                                    return(
+                                      <p className="text-xs bg-primary-400 rounded px-1 text-white ml-1 mr-1 mb-1"> {addon.label}</p>
+                                    )
+                                  })
+                                  } 
                                 </div>
                                 </>
                               }
