@@ -15,7 +15,8 @@ import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExp
 // import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
 // import ListingCarMapPage from "containers/ListingCarPage/ListingCarMapPage";
 // import ListingCarDetailPage from "containers/ListingDetailPage/ListingCarDetailPage";
-import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
+// import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
+import CheckOutPage from "app/containers/CheckOutPage/CheckOutPage";
 // import PayPage from "containers/PayPage/PayPage";
 // import AuthorPage from "containers/AuthorPage/AuthorPage";
 import AccountPage from "app/containers/AccountPage/AccounPage";

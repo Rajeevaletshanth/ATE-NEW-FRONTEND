@@ -27,12 +27,15 @@ const createUID = (len: number) => {
 }
 
 export interface PaymentCardProps {
+  className?: string;
   refresh:boolean;
+  cards: any;
+  buttonText?: string;
   setRefresh(refresh:boolean): void;
 }
 
 
-const PaymentCardModal:FC <PaymentCardProps> = ({refresh, setRefresh}) => {
+const PaymentCardModal:FC <PaymentCardProps> = ({className, refresh, cards, buttonText = "Add payment method", setRefresh}) => {
     const [showModal, setShowModal] = React.useState(false);
     const {id, email, username} = useSelector((state:any) => state.auth.user)
 
@@ -42,6 +45,7 @@ const PaymentCardModal:FC <PaymentCardProps> = ({refresh, setRefresh}) => {
     const [cvv, setCvv] = useState<string>("")
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string>("")
 
     const getCurrentMonth = () => {
       const today = new Date();
@@ -50,11 +54,29 @@ const PaymentCardModal:FC <PaymentCardProps> = ({refresh, setRefresh}) => {
 
     const [minMonth, setMinMonth] = useState(getCurrentMonth());
 
+    const checkDuplicate = (card_no:any, exp_month:string, exp_year:string) => {
+      let test = false
+      if(cards?.length > 0){
+        cards.map((item:any) => {
+          if(item.last_four_digits == card_no.substr(card_no.length - 4) && item.exp_month === exp_month && item.exp_year === exp_year){
+            test = true
+          }
+        })
+      }
+      return test
+    }
+
     const addCardApi = async () => {
-      const [year, month] = expiryDate.split("-");
- 
         setLoading(true)
-        const data = {
+        setError("")
+        const [year, month] = expiryDate.split("-");
+        const ifExists = checkDuplicate(cardNumber,month,year.slice(2))
+        
+        if(ifExists){
+          setLoading(false)
+          setError('This card is already exists!')
+        }else{
+          const data = {
             customer_name: username,
             name: name, 
             email: email,
@@ -65,23 +87,25 @@ const PaymentCardModal:FC <PaymentCardProps> = ({refresh, setRefresh}) => {
             cvc: cvv,
             cardId: createUID(8),
             primary_card: "false"
+          }
+          const response = await addPaymentCardAPi(id,data)
+          if(response.data.response === "success"){
+            setLoading(false)
+            toast.success("Card added successfully.")
+            setRefresh(!refresh)
+            setShowModal(false)
+          }else{
+            setLoading(false)
+            setError(response.data.message)
+          }
         }
-        const response = await addPaymentCardAPi(id,data)
-        if(response.data.response === "success"){
-          setLoading(false)
-          toast.success("Card added successfully.")
-          setRefresh(!refresh)
-          setShowModal(false)
-        }else{
-          setLoading(false)
-          toast.error(response.data.message)
-        }
+        
     }
 
     return (
         <>
         <ToastContainer />
-        <ButtonPrimary onClick={() => setShowModal(true)}>Add payment method</ButtonPrimary>
+        <ButtonPrimary className={`${className}`} onClick={() => setShowModal(true)}>{buttonText}</ButtonPrimary>
         {showModal ? (
           <>
             <div
@@ -102,6 +126,7 @@ const PaymentCardModal:FC <PaymentCardProps> = ({refresh, setRefresh}) => {
                     </button>
                   </div>
                   <div className="relative p-6 flex-auto">
+                    {error && <div className="bg-primary-100 text-primary-500 rounded-xl p-3 mx-2">{error}</div>}
                   <div className='p-2 text-left'>
                     <label className='ml-3 font-semibold  text-sm'>Cardholder's Name</label>
                     <Input onChange={(e) => setName(e.target.value)} type="text" placeholder="Eg. John Doe"/>

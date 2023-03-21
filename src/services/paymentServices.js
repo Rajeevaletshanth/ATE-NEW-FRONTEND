@@ -31,3 +31,14 @@ export const getPaymentCardAPi = (user_id) => {
         })
     })
 }
+
+//detach Card
+export const removePaymentCardAPi = (user_id, card_id) => {
+    return new Promise((resolve,reject) =>{
+        axios.post(`${config.SERVER_URL}/user_payment_card/remove_card/${user_id}`, {card_id:card_id}).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
