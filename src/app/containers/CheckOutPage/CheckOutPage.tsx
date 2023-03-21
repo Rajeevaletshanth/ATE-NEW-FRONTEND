@@ -201,7 +201,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <Heading children="Contact Details" className="text-xs" isCenter={true}/>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
         <div>
-          <h3 className="text-xl font-semibold">Contact Information</h3>
+          <h3 className="text-lg font-semibold">Contact Information</h3>
             <div className="mt-6">
                   <div className="space-y-1">
                     <Label>Address </Label>
@@ -225,7 +225,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <div>
           <div className="flex flex-grow">
             
-            <h3 className="text-xl font-semibold ">Contact Information</h3>
+            <h3 className="text-lg font-semibold ">Credit/Debit Cards</h3>
             <PaymentCardModal className="flex ml-auto px-0 py-1 rounded-xl bg-neutral-500 dark:bg-gray-800 hover:bg-primary-700 dark:hover:bg-primary-700" buttonText="Add New Card" refresh={cardRefresh} setRefresh={setCardRefresh} cards={cards}/>
           </div>
           

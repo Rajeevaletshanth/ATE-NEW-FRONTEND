@@ -27,7 +27,7 @@ const CardCategory: FC<CardCategoryProps> = ({
   return (
     <Link
       to=""
-      className={`nc-CardCategory1 flex items-center bg-gray-200 dark:bg-gray-700 ${className}`}
+      className={`nc-CardCategory1 flex items-center bg-gray-100 dark:bg-gray-800 ${className}`}
       data-nc-id="CardCategory1"
     >
       <NcImage

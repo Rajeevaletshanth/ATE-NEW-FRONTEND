@@ -45,7 +45,7 @@ const ListCard: FC<ListCardProps> = ({ refresh, setRefresh, setCardList }) => {
         cards.map((item:any, index:number) => {
             return(
                 <CardCategory
-                    className="p-4 xl:p-5 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
+                    className="p-4 xl:p-5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl"
                     key={index}
                     taxonomy={item}
                     size="normal"
