@@ -24,7 +24,16 @@ import { increaseProductQuantity, decreaseProductQuantity, removeFromCart } from
 import Heading from "components/Heading/Heading";
 import Authenticate from "../Authenticate/Authenticate";
 import PaymentCardModal from "../PaymentCard/PaymentCardModal";
-import ListCard from "../PaymentCard/ListCard";
+import SelectableCard from "../PaymentCard/SelectableCard";
+import ButtonSecondary from "shared/Button/ButtonSecondary";
+import { bulkOrderApi, cancelOrderApi } from 'services/orderServices';
+import { capturePaymentAPi } from 'services/paymentServices';
+import Swal, { SweetAlertResult } from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { useNavigate } from "react-router-dom";
+import { emptyCart } from "store/cart/itemsSlice";
+
+const MySwal = withReactContent(Swal);
 
 export interface CheckOutPageProps {
   className?: string;
@@ -33,10 +42,24 @@ export interface CheckOutPageProps {
 const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { products } = useSelector((state: any) => state.cart.items)
+  const { id } = useSelector((state: any) => state.auth.user)
   const [deliveryCharge, setDeliveryCharge] = useState<any>(10);
   const [refresh, setRefresh] = useState<boolean>(false)
+  const [address, setAddress] = useState<string>("");
+  const [phoneNo, setPhoneNo] = useState<string>("")
+  const [deliveryType, setDeliveryType] = useState<string>("delivery")
+  const [addressLabel, setAddressLabel] = useState<string>("")
+  const [deliverOption, setDeliverOption] = useState<string>("")
+  const [selectedCard, setSelectedCard] = useState<string>("")
+  const [isCardSelected, setIsCardSelected] = useState<boolean>(true)
+
   const [total, setTotal] = useState<any>(0)
+
+  const [cardConfirm, setCardConfirm] = useState<boolean>(false);
+  const [contactConfirm, setContactConfirm] = useState<boolean>(false);
+
   const [rangeDates, setRangeDates] = useState<DateRage>({
     startDate: moment().add(1, "day"),
     endDate: moment().add(5, "days"),
@@ -65,9 +88,12 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const [cards, setCardList] = useState<any>([])
 
   useEffect(() => {
+
+    if(products?.length === 0){
+      navigate('/')
+    }
   
     let items = [];
-
     if(products?.length > 0){
       let tempPrice = 0;
       products.map((item:any) => { 
@@ -85,10 +111,121 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     }
   },[products, refresh])
 
-  const [selectedOption, setSelectedOption] = useState('delivery');
+  
 
 
   const renderSidebar = () => {
+
+    const handlePayment = async () => {
+      let orders: any = [];
+      const groupedProducts = Object.values(products.reduce((acc:any, product:any) => {
+        const { restaurant_id } = product;
+        if (!acc[restaurant_id]) {
+          acc[restaurant_id] = {restaurant_id, products: []};
+        }
+        acc[restaurant_id].products.push(product);
+        return acc;
+      }, {}));
+
+      groupedProducts?.forEach((restaurant:any, key:number) => {
+        let tempPrice = 0;
+        let productsArr: any = [] 
+        restaurant.products.forEach((item:any, productKey: number) => {
+          let itemPrice = 0;
+          let addonPrice = 0;
+          let addonsArr:any = [];
+          itemPrice = item.price;
+          if(item.addons){
+            if(typeof item.addons === "object"){
+              if(item.addons.length > 0){
+                item.addons.forEach((addon:any, addonKey:number) => {
+                  addonPrice += addon.price;
+                  addonsArr[addonKey] = {
+                    addon_id : addon.id,
+                    addon_name : addon.label,
+                    unit_price : addon.price,
+                    quantity : 1
+                  }
+                })
+              }
+            }else{
+              if(JSON.parse(item.addons).length > 0){
+                JSON.parse(item.addons).forEach((addon:any, addonKey:number) => {
+                  addonPrice += addon.price;
+                  addonsArr[addonKey] = {
+                    addon_id : addon.id,
+                    addon_name : addon.label,
+                    unit_price : addon.price,
+                    quantity : 1
+                  }
+                })
+              }
+            }
+          }
+          tempPrice += (itemPrice + addonPrice)*item.quantity
+          productsArr[productKey] = {
+            product_id: item.id,
+            quantity: item.quantity,
+            addons: addonsArr
+          }
+        })
+        orders[key] = {
+          restaurant_id: restaurant.restaurant_id,
+          user_id: id,
+          products: productsArr,
+          // delivery_fee : 0,
+          total_amount : tempPrice,
+          status : "pending",
+          order_type : deliveryType,
+          delivery_address : address,
+          phone_no : phoneNo
+        }
+      })
+
+      const response = await bulkOrderApi(orders);
+      if(response.data.response === "success"){
+        //Card Payment
+        const paymentData = {
+          user_id: id,
+          amount: (total + (deliveryType === "delivery"? deliveryCharge: 0))*100, 
+          paymentMethodId: selectedCard,
+          currency: "eur"
+        }
+        const payment = await capturePaymentAPi(paymentData)
+        if(payment.data.response === "success"){
+          MySwal.fire({
+            title:"Payment successful",
+            text: "Order placed successful",
+            icon: "success",
+            confirmButtonText: "Track my order",
+            confirmButtonColor: 'rgba(218, 0, 0, 1)',
+          }).then(() => {
+            const cartProducts = products;
+            dispatch(emptyCart())
+            navigate('/pay-done', { state: { products: cartProducts } });
+          })
+        }else{
+          response.data.data.map(async(item:any) => {
+            await cancelOrderApi(item.id)
+          })
+          MySwal.fire({
+            title:"Oops",
+            text: "Payment failure. Please try again.",
+            icon: "error",
+            confirmButtonColor: 'rgba(218, 0, 0, 1)',
+          })
+        }
+      }else{
+        MySwal.fire({
+          title:"Oops",
+          text: response.data.message,
+          icon: "error",
+          confirmButtonColor: 'rgba(218, 0, 0, 1)',
+        })
+      }
+      
+    }
+
     return (
       <div className="">
         <div className="w-full flex flex-col sm:rounded-2xl lg:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 px-0 sm:p-6 xl:p-8">
@@ -105,33 +242,33 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                     <p className={`text-sm md:text-sm font-medium`}>No delivery charge for self pickup</p> 
                     <div className="flex w-1/2 mx-auto rounded-lg border border-5 border-primary-500 overflow-hidden mt-3">
                       <button 
-                        className={`flex-1 text-sm font-medium px-2 py-2 ${selectedOption === 'pickup' ? 'bg-primary-500 text-white' : 'bg-white dark:bg-neutral-900'}`} 
-                        onClick={() => setSelectedOption('pickup')}
+                        className={`flex-1 text-sm font-medium px-2 py-2 ${deliveryType === 'pickup' ? 'bg-primary-500 text-white' : 'bg-white dark:bg-neutral-900'}`} 
+                        onClick={() => setDeliveryType('pickup')}
                       >
                         Pickup
                       </button>
                       <button 
-                        className={`flex-1 text-sm font-medium px-2 py-2 ${selectedOption === 'delivery' ? 'bg-primary-500 text-white' : 'bg-white dark:bg-neutral-900'}`} 
-                        onClick={() => setSelectedOption('delivery')}
+                        className={`flex-1 text-sm font-medium px-2 py-2 ${deliveryType === 'delivery' ? 'bg-primary-500 text-white' : 'bg-white dark:bg-neutral-900'}`} 
+                        onClick={() => setDeliveryType('delivery')}
                       >
                         Delivery
                       </button>
                     </div>
                   </div> 
-                  <div className="text-center mb-4" hidden={selectedOption === "delivery"? false: true}>
+                  <div className="text-center mb-4" hidden={deliveryType === "delivery"? false: true}>
                     <p className="text-sm font-medium">Delivered to</p>
                     <div className="border-b border-neutral-200 dark:border-neutral-700 w-1/12 mx-auto border-primary-500 mb-2"></div> 
-                    <p  className="text-xs">Michael rd, mannar</p>
-                    <p  className="text-xs">0712345672</p>
+                    <p  className="text-xs">{address}</p>
+                    <p  className="text-xs">{phoneNo}</p>
                   </div>  
 
                   <div className="border-b border-neutral-200 dark:border-neutral-700 mb-4"></div> 
 
                   <div className="relative grid gap-8 bg-white dark:bg-neutral-900 p-4 overflow:p-7 overflow-x-hidden overflow-y-auto" style={{ maxHeight:"500px" }}>                   
-                  {products?.map((item: any, index: number) => { 
+                  {products?.map((item: any, key: number) => { 
                       return(
                     <a
-                      key={index}
+                      key={key}
                       style={{cursor:"context-menu"}}
                       className="flex p-2 pr-8 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 relative"
                     >
@@ -174,16 +311,17 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       </div>
                       <div className="flex justify-between text-neutral-6000 dark:text-neutral-300" >
                         <span>Delivery Charge</span>
-                        <span>€ {selectedOption === "delivery"?deliveryCharge : 0}</span>
+                        <span>€ {deliveryType === "delivery"?deliveryCharge : 0}</span>
                       </div>
 
                       <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
                       <div className="flex justify-between font-semibold">
                         <span>Total</span>
-                        <span className="text-2xl font-bold text-primary-500">€ {total + (selectedOption === "delivery"? deliveryCharge: 0)}</span>
+                        <span className="text-2xl font-bold text-primary-500">€ {total + (deliveryType === "delivery"? deliveryCharge: 0)}</span>
                       </div>
                     </div>
-                    <ButtonPrimary  sizeClass="p-2 rounded-xl mt-6">Make Payment</ButtonPrimary>
+                    {/* <ButtonPrimary  sizeClass="p-2 rounded-xl mt-6 disabled:bg-gray-800" onClick={handlePayment}>Make Payment</ButtonPrimary> */}
+                    <ButtonPrimary  sizeClass="p-2 rounded-xl mt-6 disabled:bg-gray-800" disabled={cardConfirm && contactConfirm? false: true} onClick={handlePayment}>Make Payment</ButtonPrimary>
                   </>
                   }
                 </div>
@@ -194,6 +332,35 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   };
 
   const renderMain = () => {
+    const handleContactConfirm = (e:any) => {
+      e.preventDefault();
+      setContactConfirm(true);
+    }
+
+    const handleContactReset = () => {
+      setAddress("")
+      setPhoneNo("")
+      setAddressLabel("")
+      setDeliverOption("")
+      setContactConfirm(false);
+    }
+
+    const handleCardConfirm = () => {
+      if(selectedCard === ""){
+        setIsCardSelected(false)
+        setCardConfirm(false);
+      }else{
+        setIsCardSelected(true)
+        setCardConfirm(true);
+      }
+      
+    }
+
+    const handleCardReset = () => {
+      setSelectedCard("")
+      setCardConfirm(false);
+    }
+
     return (
       <>
       {/* Contact Details */}
@@ -201,20 +368,48 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <Heading children="Contact Details" className="text-xs" isCenter={true}/>
         <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
         <div>
-          <h3 className="text-lg font-semibold">Contact Information</h3>
+          <form onSubmit={handleContactConfirm}>
+            <h3 className="text-lg font-semibold">Contact Information</h3>
             <div className="mt-6">
                   <div className="space-y-1">
                     <Label>Address </Label>
-                    <Input placeholder="Delivery Address" />
+                    <Input required minLength={5} maxLength={100} placeholder="Delivery Address" value={address} onChange={(e) => setAddress(e.target.value)}/>
                   </div>
                   <div className="space-y-1 mt-4">
                     <Label>Phone Number </Label>
-                    <Input placeholder="Eg. 0123456789" />
+                    <Input required minLength={9} maxLength={15} placeholder="Eg. 0123456789" value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)}/>
                   </div>
-            <div className="pt-8 flex justify-center">
-              <ButtonPrimary className="rounded-xl">Confirm</ButtonPrimary>
             </div>
-          </div>
+
+            <h3 className="text-lg font-semibold mt-6">Address Label (Optional)</h3>
+            <div className="flex items-center mt-6">
+              <label className="inline-flex items-center">
+                <input type="radio" checked={addressLabel === 'home'} onChange={(e) => setAddressLabel(e.target.value)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="deliver" value="home" />
+                <span className="ml-4">Home</span>
+              </label>
+              <label className="inline-flex items-center ml-6">
+                <input type="radio" checked={addressLabel === 'work'} onChange={(e) => setAddressLabel(e.target.value)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="deliver" value="work"/>
+                <span className="ml-4">Work</span>
+              </label>
+            </div>
+
+            <h3 className="text-lg font-semibold mt-6">Deliver to (Optional)</h3>
+            <div className="flex items-center mt-6">
+              <label className="inline-flex items-center">
+                <input type="radio" checked={deliverOption === 'door'} onChange={(e) => setDeliverOption(e.target.value)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="pickup" value="door" />
+                <span className="ml-4">Deliver to door</span>
+              </label>
+              <label className="inline-flex items-center ml-6">
+                <input type="radio" checked={deliverOption === 'outside'} onChange={(e) => setDeliverOption(e.target.value)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="pickup" value="outside"/>
+                <span className="ml-4">Pickup outside</span>
+              </label>
+            </div>
+
+            <div className="pt-8 flex justify-center space-x-2">
+              <ButtonSecondary className="rounded-xl" onClick={handleContactReset}>Reset</ButtonSecondary>
+              <ButtonPrimary type="submit" className="rounded-xl disabled:bg-gray-800" disabled={contactConfirm?true:false}>{contactConfirm? "Confirmed":"Confirm"}</ButtonPrimary>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -230,11 +425,14 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           </div>
           
             <div className="mt-6">
+            {!isCardSelected && <code className="flex border border-primary-500 py-2 text-lg font-bold text-primary-500 justify-center mb-4">Please select a card!</code>}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <ListCard refresh={refresh} setRefresh={setRefresh} setCardList={setCardList}/>
-              </div>
-              <div className="pt-8 flex justify-center">
-                <ButtonPrimary className="rounded-xl">Confirm</ButtonPrimary>
+                <SelectableCard refresh={refresh} setRefresh={setRefresh} setCardList={setCardList} selectedCard={selectedCard} setSelectedCard={setSelectedCard}/>
+            </div>
+              
+              <div className="pt-8 flex justify-center space-x-2">
+                <ButtonSecondary className="rounded-xl" onClick={handleCardReset}>Reset</ButtonSecondary>
+                <ButtonPrimary className="rounded-xl disabled:bg-gray-800" onClick={handleCardConfirm} disabled={cardConfirm?true:false}>{cardConfirm? "Confirmed":"Confirm"}</ButtonPrimary>
               </div>
           </div>
         </div>

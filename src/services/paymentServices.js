@@ -42,3 +42,14 @@ export const removePaymentCardAPi = (user_id, card_id) => {
         })
     })
 }
+
+//Capture a payment
+export const capturePaymentAPi = (data) => {
+    return new Promise((resolve,reject) =>{
+        axios.post(`${config.SERVER_URL}/user_payment/capture_payment`, data).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
