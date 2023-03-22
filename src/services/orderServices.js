@@ -24,7 +24,7 @@ export const bulkOrderApi = (data) => {
 //Add card
 export const cancelOrderApi = (id) => {
     return new Promise((resolve,reject) =>{
-        axios.put(`${config.SERVER_URL}/orders/edit/${id}`, { status : "cancelled" }).then((res) => {
+        axios.delete(`${config.SERVER_URL}/orders/delete/${id}`).then((res) => {
             resolve(res)
         }).catch ((res) => {
             reject(res)

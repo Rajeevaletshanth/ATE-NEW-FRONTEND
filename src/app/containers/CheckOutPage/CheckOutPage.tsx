@@ -206,7 +206,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           })
         }else{
           response.data.data.map(async(item:any) => {
-            await cancelOrderApi(item.id)
+            await cancelOrderApi(item[0].id)
           })
           MySwal.fire({
             title:"Oops",
