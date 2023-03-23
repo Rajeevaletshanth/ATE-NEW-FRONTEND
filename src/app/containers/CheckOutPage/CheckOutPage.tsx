@@ -33,6 +33,11 @@ import withReactContent from 'sweetalert2-react-content';
 import { useNavigate } from "react-router-dom";
 import { emptyCart } from "store/cart/itemsSlice";
 
+import config from '../../../config/config.json'
+const socket = require("socket.io-client")('http://localhost:5006', {
+  rejectUnauthorized: true 
+});
+
 const MySwal = withReactContent(Swal);
 
 export interface CheckOutPageProps {
@@ -43,6 +48,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false)
   const { products } = useSelector((state: any) => state.cart.items)
   const { id } = useSelector((state: any) => state.auth.user)
   const [deliveryCharge, setDeliveryCharge] = useState<any>(10);
@@ -88,11 +94,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const [cards, setCardList] = useState<any>([])
 
   useEffect(() => {
-
-    if(products?.length === 0){
-      navigate('/')
-    }
-  
     let items = [];
     if(products?.length > 0){
       let tempPrice = 0;
@@ -111,12 +112,19 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
     }
   },[products, refresh])
 
+  useEffect(() => {
+    if(products?.length === 0){
+      navigate('/')
+    }
+  },[])
+
   
 
 
   const renderSidebar = () => {
 
     const handlePayment = async () => {
+      setLoading(true)
       let orders: any = [];
       const groupedProducts = Object.values(products.reduce((acc:any, product:any) => {
         const { restaurant_id } = product;
@@ -193,6 +201,16 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         }
         const payment = await capturePaymentAPi(paymentData)
         if(payment.data.response === "success"){
+          setLoading(false)
+          //Real-time Render
+          const cartProducts = products;
+          dispatch(emptyCart())
+          response.data.data.map((item:any) => {
+            // socket.emit('update_order_status', { room: item[0].restaurant_id, orderStatus: 'in progress' });
+            // socket.emit("join_room", item[0].restaurant_id);
+            socket.emit('order_placed', { room: item[0].restaurant_id, message: 'New order received' });
+          })
+          
           MySwal.fire({
             title:"Payment successful",
             text: "Order placed successful",
@@ -200,11 +218,10 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
             confirmButtonText: "Track my order",
             confirmButtonColor: 'rgba(218, 0, 0, 1)',
           }).then(() => {
-            const cartProducts = products;
-            dispatch(emptyCart())
             navigate('/pay-done', { state: { products: cartProducts } });
           })
         }else{
+          setLoading(false)
           response.data.data.map(async(item:any) => {
             await cancelOrderApi(item[0].id)
           })
@@ -216,6 +233,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           })
         }
       }else{
+        setLoading(false)
         MySwal.fire({
           title:"Oops",
           text: response.data.message,
@@ -321,7 +339,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       </div>
                     </div>
                     {/* <ButtonPrimary  sizeClass="p-2 rounded-xl mt-6 disabled:bg-gray-800" onClick={handlePayment}>Make Payment</ButtonPrimary> */}
-                    <ButtonPrimary  sizeClass="p-2 rounded-xl mt-6 disabled:bg-gray-800" disabled={cardConfirm && contactConfirm? false: true} onClick={handlePayment}>Make Payment</ButtonPrimary>
+                    <ButtonPrimary loading={loading}  sizeClass="p-2 rounded-xl mt-6 disabled:bg-gray-800" disabled={cardConfirm && contactConfirm? false: true} onClick={handlePayment}>{loading?"Processing": "Make Payment"}</ButtonPrimary>
                   </>
                   }
                 </div>
@@ -358,6 +376,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
 
     const handleCardReset = () => {
       setSelectedCard("")
+      setIsCardSelected(true)
       setCardConfirm(false);
     }
 
