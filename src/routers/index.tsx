@@ -58,12 +58,14 @@ import Restaurant from "app/containers/Restaurant/Restaurant";
 import AllRestaurant from "app/containers/Restaurant/AllRestaurant";
 
 import Chat from "app/containers/Chat/Chat";
+import OrderTracker from "app/containers/OrderTracker/OrderTracker";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: Dashboard },
   { path: "/#", exact: true, component: Dashboard },
   { path: "/restaurant", exact: true, component: AllRestaurant },
   { path: "/restaurant/:id", exact: false, component: Restaurant },
+  { path: "/order-tracking", exact: false, component: OrderTracker },
   { path: "/chat", exact: true, component: Chat },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },
@@ -97,6 +99,7 @@ export const pages: Page[] = [
 
   { path: "/checkout", component: CheckOutPage },
   { path: "/pay-done", component: PayPage },
+  
 
   // { path: "/author", component: AuthorPage },
   { path: "/account", component: AccountPage },

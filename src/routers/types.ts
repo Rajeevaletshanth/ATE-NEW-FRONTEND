@@ -8,6 +8,7 @@ export interface LocationStates {
   "/home-2"?: {};
   "/home-3"?: {};
   "/home-1-header-2"?: {};
+  "/order-tracking"?: {};
   //
   "/listing-flights"?: {};
   //

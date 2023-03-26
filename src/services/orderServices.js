@@ -10,7 +10,6 @@ const header=()=>{
     }
 }
 
-//Add card
 export const bulkOrderApi = (data) => {
     return new Promise((resolve,reject) =>{
         axios.post(`${config.SERVER_URL}/orders/create_bulk`, { orders : data }).then((res) => {
@@ -21,10 +20,21 @@ export const bulkOrderApi = (data) => {
     })
 }
 
-//Add card
+
 export const cancelOrderApi = (id) => {
     return new Promise((resolve,reject) =>{
         axios.delete(`${config.SERVER_URL}/orders/delete/${id}`).then((res) => {
+            resolve(res)
+        }).catch ((res) => {
+            reject(res)
+        })
+    })
+}
+
+
+export const trackOrderApi = (order_number) => {
+    return new Promise((resolve,reject) =>{
+        axios.post(`${config.SERVER_URL}/orders/track`, { order_number:order_number }).then((res) => {
             resolve(res)
         }).catch ((res) => {
             reject(res)

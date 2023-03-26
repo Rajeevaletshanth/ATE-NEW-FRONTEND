@@ -34,7 +34,7 @@ import { useNavigate } from "react-router-dom";
 import { emptyCart } from "store/cart/itemsSlice";
 
 import config from '../../../config/config.json'
-const socket = require("socket.io-client")('http://localhost:5006', {
+const socket = require("socket.io-client")(config.SOCKET_URL, {
   rejectUnauthorized: true 
 });
 
@@ -66,15 +66,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const [cardConfirm, setCardConfirm] = useState<boolean>(false);
   const [contactConfirm, setContactConfirm] = useState<boolean>(false);
 
-  const [rangeDates, setRangeDates] = useState<DateRage>({
-    startDate: moment().add(1, "day"),
-    endDate: moment().add(5, "days"),
-  });
-  const [guests, setGuests] = useState<GuestsObject>({
-    guestAdults: 2,
-    guestChildren: 1,
-    guestInfants: 1,
-  });
 
   const addQuantity = (id:number, type:string) => {
     dispatch(increaseProductQuantity({id: id, type: type}));
@@ -206,8 +197,6 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           const cartProducts = products;
           dispatch(emptyCart())
           response.data.data.map((item:any) => {
-            // socket.emit('update_order_status', { room: item[0].restaurant_id, orderStatus: 'in progress' });
-            // socket.emit("join_room", item[0].restaurant_id);
             socket.emit('order_placed', { room: item[0].restaurant_id, message: 'New order received' });
           })
           
@@ -446,7 +435,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
             <div className="mt-6">
             {!isCardSelected && <code className="flex border border-primary-500 py-2 text-lg font-bold text-primary-500 justify-center mb-4">Please select a card!</code>}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <SelectableCard refresh={refresh} setRefresh={setRefresh} setCardList={setCardList} selectedCard={selectedCard} setSelectedCard={setSelectedCard}/>
+                <SelectableCard refresh={cardRefresh} setRefresh={setCardRefresh} setCardList={setCardList} selectedCard={selectedCard} setSelectedCard={setSelectedCard}/>
             </div>
               
               <div className="pt-8 flex justify-center space-x-2">

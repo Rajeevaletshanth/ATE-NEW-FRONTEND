@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import config from '../../../config/config.json'
 
 // const socket = io(config.SERVER_URL);
-const socket = require("socket.io-client")('http://localhost:5006', {
+const socket = require("socket.io-client")(config.SOCKET_URL, {
   rejectUnauthorized: true 
 });
 
