@@ -112,8 +112,12 @@ const OrderTracker:FC <OrderTrackerProps> = ({className}) => {
     }
 
     const renderAnimation = () => {
-        var orderTime = new Date("2023-03-26T23:39:00");
-        const formattedTime = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).format(orderTime)
+        const timeString = orderDetails.order_time;
+        const date = new Date();
+        date.setHours(timeString.split(':')[0]);
+        date.setMinutes(timeString.split(':')[1]);
+        date.setSeconds(timeString.split(':')[2]);
+        const formattedTime = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).format(date)
       return(
         <>
         {/* <div className='flex md:hidden justify-center pt-3'>
@@ -177,7 +181,7 @@ const OrderTracker:FC <OrderTrackerProps> = ({className}) => {
                     {error && 
                     <div className="flex flex-col justify-center items-center text-2xl font-semibold py-8"><BsCartX size={100} className="text-primary-500 mb-3"/>Order not found!</div>
                     }
-                    { Object.keys(orderDetails).length > 0 &&
+                    { Object.keys(orderDetails).length > 0 && error === "" &&
                     <><Stepper currentStep={activeStep} complete={false}/> 
                     {renderAnimation()}</>}
 

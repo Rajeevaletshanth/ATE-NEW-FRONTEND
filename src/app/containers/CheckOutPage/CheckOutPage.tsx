@@ -194,10 +194,12 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         if(payment.data.response === "success"){
           setLoading(false)
           //Real-time Render
-          const cartProducts = products;
+          const cartProducts = groupedProducts;
+          let order_data: any = []
           dispatch(emptyCart())
-          response.data.data.map((item:any) => {
+          response.data.data.map((item:any,key:number) => {
             socket.emit('order_placed', { room: item[0].restaurant_id, message: 'New order received' });
+            order_data[key] = item[0]
           })
           
           MySwal.fire({
@@ -207,7 +209,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
             confirmButtonText: "Track my order",
             confirmButtonColor: 'rgba(218, 0, 0, 1)',
           }).then(() => {
-            navigate('/pay-done', { state: { products: cartProducts } });
+            navigate('/pay-done', { state: { products: cartProducts, delivery_fee: deliveryCharge, order_details: order_data } });
           })
         }else{
           setLoading(false)
