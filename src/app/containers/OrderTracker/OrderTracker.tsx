@@ -10,11 +10,6 @@ import { BsCartX } from 'react-icons/bs';
 import Lottie from "lottie-react";
 import trackMyOrder from "./lottiAnimations/71216-delivery-guy.json";
 import greenTick from "./lottiAnimations/green-tick.json";
-import pendingSign from "./lottiAnimations/pending.json";
-import cooking from "./lottiAnimations/cooking.json";
-import darkCooking from "./lottiAnimations/109232-cooking-ingredients.json"
-import Heading from 'components/Heading/Heading';
-import DeliveryTracker from '../GoogleMap/DeliveryTracker';
 import TwoEndPoint from '../GoogleMap/TwoEndPoint';
 
 import config from '../../../config/config.json'

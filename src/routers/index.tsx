@@ -12,7 +12,7 @@ import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExp
 // import ListingExperiencesMapPage from "containers/ListingExperiencesPage/ListingExperiencesMapPage";
 // import ListingStayDetailPage from "containers/ListingDetailPage/ListingStayDetailPage";
 // import ListingExperiencesDetailPage from "containers/ListingDetailPage/ListingExperiencesDetailPage";
-// import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
+import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
 // import ListingCarMapPage from "containers/ListingCarPage/ListingCarMapPage";
 // import ListingCarDetailPage from "containers/ListingDetailPage/ListingCarDetailPage";
 // import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
@@ -59,6 +59,7 @@ import AllRestaurant from "app/containers/Restaurant/AllRestaurant";
 
 import Chat from "app/containers/Chat/Chat";
 import OrderTracker from "app/containers/OrderTracker/OrderTracker";
+import TableReservation from "app/containers/TableReservation/TableReservation";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: Dashboard },
@@ -66,6 +67,7 @@ export const pages: Page[] = [
   { path: "/restaurant", exact: true, component: AllRestaurant },
   { path: "/restaurant/:id", exact: false, component: Restaurant },
   { path: "/order-tracking", exact: false, component: OrderTracker },
+  { path: "/reservation", exact: true, component: TableReservation },
   { path: "/chat", exact: true, component: Chat },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },
@@ -88,7 +90,7 @@ export const pages: Page[] = [
   //   component: ListingExperiencesDetailPage,
   // },
 
-  // { path: "/listing-car", component: ListingCarPage },
+  { path: "/listing-car", component: ListingCarPage },
   // { path: "/listing-car-map", component: ListingCarMapPage },
   // { path: "/listing-car-detail", component: ListingCarDetailPage },
 

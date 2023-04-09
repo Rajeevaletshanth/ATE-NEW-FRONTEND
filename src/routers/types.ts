@@ -9,6 +9,7 @@ export interface LocationStates {
   "/home-3"?: {};
   "/home-1-header-2"?: {};
   "/order-tracking"?: {};
+  "/reservation"?: {};
   //
   "/listing-flights"?: {};
   //
