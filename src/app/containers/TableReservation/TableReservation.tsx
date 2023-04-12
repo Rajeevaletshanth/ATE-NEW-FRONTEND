@@ -16,6 +16,7 @@ import moment from 'moment'
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Heading from 'components/Heading/Heading'
+import NoteInput from './NoteInput'
 
 const MySwal = withReactContent(Swal);
 
@@ -31,6 +32,8 @@ const TableReservation = () => {
  const [validTimeGap, setValidTimeGap] = useState<boolean>(true)
 
  const [guestValue, setGuestValue] = useState({});
+
+ const [note, setNote] = useState("");
 
  const [restaurantData, setRestaurantData] = useState<any>({});
  const [timezone, setTimezone] = useState<any>("Europe/Rome")
@@ -58,7 +61,7 @@ const TableReservation = () => {
     if(totalSeats >= totalGuests){
         bookTable(table_arr, totalGuests, totalGuests)
     }else{
-
+        renderEmptyMessage()
     }
     // console.log(totalSeats)
  }
@@ -87,15 +90,12 @@ const TableReservation = () => {
         
     }
 
-    console.log(selectedTables.filter((value: any, index: number, self: any) => self.indexOf(value) === index));
-};
+    // console.log(selectedTables.filter((value: any, index: number, self: any) => self.indexOf(value) === index));
+    // console.log(note)
 
+    tableReservation(selectedTables,totalGuests)
+  };
 
-
-
-
-
-  
 
   const tableReservation = async(selectedTables: any, totalGuests:number) => {
     
@@ -115,9 +115,15 @@ const TableReservation = () => {
         reservation_from: res_from,
         reservation_to: res_to,
         timezone: timezone,
-        note: ""
-  }
+        note: note
+    }
     const response = await reserveTable(1,data);
+    if(response.data.response === "success"){
+        renderAvailableTables(response.data.data, response.data.qrcode, selectedTables)
+    }else{
+        renderEmptyMessage();
+    }
+    
     console.log(response.data) 
   }
   
@@ -140,7 +146,7 @@ const TableReservation = () => {
     if(response.data.response === "success"){
         checkTotalSeats(response.data.tables, guestValue)
         // renderEmptyMessage()
-        renderAvailableTables(response.data.tables)
+        // renderAvailableTables(response.data.tables)
         setLoading(false)
     }else{
         renderEmptyMessage()
@@ -178,15 +184,43 @@ const TableReservation = () => {
     }
  },[startTimeValue, endTimeValue])
 
-    const renderAvailableTables = (tables:any) => {
+    const downloadQr = (qr_url:any, filename:any) => {
+        const link = document.createElement("a");
+        link.href = qr_url;
+        link.download = filename;
+        link.click();
+    };
+
+    const renderAvailableTables = (reservation:any,qrcode:string,selectedTables:any) => {
+
         MySwal.fire({
-            title: <Heading children="Available Tables" className='text-neutral-900 text-sm' isCenter={true} />,
+            
+            title: <Heading children="Reservation Confirmed" className='text-neutral-900 text-xl mt-6' isCenter={true} />,
+            // text: "Table reserved successfully.",
             html: (
-                <div className='p-5'> 
+                <div> 
+                    <Avatar sizeClass="w-60 h-60" radius="rounded" imgUrl={qrcode}/>
+                    <p>Date : {reservation.reservation_date}</p>
+                    <p>Time : {startTimeValue} - {endTimeValue}</p>
+                    <p>Guests : {reservation.guests_count}</p>
+                    <p>Note : {reservation.note}</p>
+                    <p>Reserved Tables : {" "}
+                        {selectedTables.map((item:any,key:number) => {
+                            console.log(item)
+                            if(selectedTables.length === key+1){
+                                return item.table_no
+                            }
+                            return ( item.table_no + ", ")
+                        })}
+                        {/* {reservation.table_ids} */}
+                    </p>
+                    
+                {/* <img src={qrcode} alt="" /> */}
+                {/* <p>Following tables are booked.</p>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     {tables.map((item:any, index: number) => {                   
                         return (
-                            <div className='p-3 border border-neutral-200 dark:border-neutral-800'>
+                            <div className='flex flex-row p-3 rounded-xl border border-neutral-200 dark:border-neutral-800'>
                                 <p>{item.table_no}</p>
                                 <p>{item.table_type}</p>
                                 <p>{item.seat_count}</p>
@@ -194,16 +228,23 @@ const TableReservation = () => {
                         )
                     })}
                 
-                </div>
+                </div> */}
                 {/* <p className='mt-4 text-neutral-400' style={{fontSize:"13px"}}>If you do not require any addons, simply leave the checkboxes blank and proceed to add to cart.</p> */}
                 </div>
             ),
-            showCancelButton: true,
-            confirmButtonText: `Confirm`,
-            confirmButtonColor: 'rgba(218, 0, 0, 1)',
+            confirmButtonText: `Download QR`,
+            confirmButtonColor: 'green',
             // preConfirm: () => {
             //     return selectedArray;
             // }
+        }).then((result: SweetAlertResult<any>) => {
+            if (result.isConfirmed){
+                downloadQr(
+                    qrcode,
+                    `QR Code - Reservation ${reservation.id}`
+                )
+            }
+            window.location.reload();
         })
     }
 
@@ -277,6 +318,13 @@ const TableReservation = () => {
                             <GuestsInput
                                 defaultValue={guestValue}
                                 onChange={(data) => setGuestValue(data)}
+                                className="flex-[1.5]  mt-4 mb-4"
+                                buttonSubmitHref="/listing-experiences"
+                            />
+
+                            <NoteInput 
+                                defaultValue={note}
+                                onChange={(data) => setNote(data)}
                                 className="flex-[1.5]  mt-4 mb-4"
                                 buttonSubmitHref="/listing-experiences"
                             />
