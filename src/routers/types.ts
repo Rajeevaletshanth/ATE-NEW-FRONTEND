@@ -10,6 +10,7 @@ export interface LocationStates {
   "/home-1-header-2"?: {};
   "/order-tracking"?: {};
   "/reservation"?: {};
+  "/reservation/:id"?: {};
   //
   "/listing-flights"?: {};
   //

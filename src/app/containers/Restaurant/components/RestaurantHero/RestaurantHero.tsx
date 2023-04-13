@@ -7,6 +7,8 @@ import Heading from "components/Heading/Heading";
 import StartRating from "components/StartRating/StartRating";
 import NcImage from "shared/NcImage/NcImage";
 import { HiOutlineAtSymbol, HiPhone } from "react-icons/hi";
+import ButtonPrimary from "shared/Button/ButtonPrimary";
+import { Link } from "react-router-dom";
 
 export interface RestaurantHeroProps {
   className?: string;
@@ -16,6 +18,7 @@ export interface RestaurantHeroProps {
 }
 
 const RestaurantHero: FC<RestaurantHeroProps> = ({ className = "", data, point, reviewCount }) => {
+console.log(data)
   return (
     <div
       className={`nc-SectionHeroArchivePage flex flex-col relative ${className}`}
@@ -34,7 +37,7 @@ const RestaurantHero: FC<RestaurantHeroProps> = ({ className = "", data, point, 
             <div className="flex-grow sm:text-left text-center mt-1 sm:mt-2">
               <Heading
                 children={data.name}
-                desc={data.description}
+                // desc={data.description}
                 className="text-black dark:text-white mb-4"
                 underline={false}
               />
@@ -47,8 +50,12 @@ const RestaurantHero: FC<RestaurantHeroProps> = ({ className = "", data, point, 
                 <i className="mt-0.5 text-sm las la-phone"></i>
                 <span className="ml-2.5 text-sm">{data.phone_no}</span>
               </div>
+              <StartRating className="mt-2" point={point} reviewCount={reviewCount}/>
 
-              <StartRating className="mt-4" point={point} reviewCount={reviewCount}/>
+              <Link to={`/reservation/${data.id}`}>
+                <ButtonPrimary className="rounded-lg px-4 py-2 md:px-4 md:py-2 mt-2">Reserve Now</ButtonPrimary> 
+              </Link>
+
             </div>
           </div>
         </div>

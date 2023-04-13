@@ -47,7 +47,7 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({
     if (response.data.response === "success") {
       let data = response.data.restaurant[0];
       setRestaurantData({
-        id: 1,
+        id: data.id,
         name: data.name,
         email: data.email,
         phone_no: data.phone_no,

@@ -9,34 +9,31 @@ import SaleOffBadge from "components/SaleOffBadge/SaleOffBadge";
 import Badge from "shared/Badge/Badge";
 import NcImage from "shared/NcImage/NcImage";
 import { BiFoodTag } from 'react-icons/bi'
+import ButtonPrimary from "shared/Button/ButtonPrimary";
+import ButtonSecondary from "shared/Button/ButtonSecondary";
 
 export interface RestaurantCardProps {
   className?: string;
-  data?: StayDataType;
+  data?: any;
 }
 
-const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
 const RestaurantCard: FC<RestaurantCardProps> = ({
   className = "",
-  data = DEMO_DATA,
+  data
 }) => {
   const {
-    galleryImgs,
-    listingCategory,
-    address,
-    title,
+    avatar,
+    email,
+    desc,
     href,
-    like,
-    saleOff,
-    isAds,
-    price,
-    reviewStart,
-    reviewCount,
+    phone_no,
     id,
+    name
   } = data;
 
   const renderSliderGallery = () => {
+    console.log(data)
     return (
       <div className="relative flex-shrink-0 w-full md:w-72 ">
         {/* <GallerySlider
@@ -46,7 +43,7 @@ const RestaurantCard: FC<RestaurantCardProps> = ({
           href={href}
         /> */}
         <div className="aspect-w-4 aspect-h-3">
-          <NcImage src={galleryImgs[0]}  />
+          <NcImage src={avatar}  />
         </div>
         {/* {saleOff && <SaleOffBadge className="absolute left-3 top-3" />} */}
       </div>
@@ -56,7 +53,7 @@ const RestaurantCard: FC<RestaurantCardProps> = ({
   const renderContent = () => {
     return (
       <div className="flex-grow p-3 sm:p-5 flex flex-col xl:mt-6 lg:mt-6">
-        <BtnLikeIcon isLiked={like} className="absolute right-3 top-3" />
+        <BtnLikeIcon isLiked={false} className="absolute right-3 top-3" />
         
         <div className="space-y-2">
           
@@ -67,27 +64,30 @@ const RestaurantCard: FC<RestaurantCardProps> = ({
           </div> */}
           <div className="flex items-center space-x-2">
             <h2 className="text-lg font-medium capitalize">
-              <span className="line-clamp-1">{title}</span>
+              <span className="line-clamp-1">{name}</span>
             </h2>
-            {isAds && <Badge name="VEG" color="green" />}
+            {/* {isAds && <Badge name="VEG" color="green" />} */}
           </div>
         </div>
-        {/* <div className="hidden sm:block w-14 border-b border-neutral-100 dark:border-neutral-800 my-4"></div> */}
-        <span className="text-sm text-neutral-500 dark:text-neutral-400">
-          Delicious Food
-        </span>
-        {/* {renderTienIch()} */}
-        {/* <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 my-4"></div> */}
-        <div className="flex justify-between items-end">
-          <StartRating reviewCount={reviewCount} point={reviewStart} />
-          <span className="text-base font-semibold border border-1 text-secondary-500 border-secondary-500 px-2 rounded-xl">
-            {price}
-            {` `}
-            {/* <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-              /night
-            </span> */}
-          </span>
-        </div>
+
+              <div className="flex flex-row text-sm text-neutral-500 dark:text-neutral-400">
+                <i className="mt-0.5 text-sm las la-envelope"></i>
+                <span className="ml-2.5 text-sm">{data.email}</span>
+              </div>
+              <div className="flex flex-row text-sm text-neutral-500 dark:text-neutral-400">
+                <i className="mt-0.5 text-sm las la-phone"></i>
+                <span className="ml-2.5 text-sm">{data.phone_no}</span>
+              </div>
+              <StartRating className="mt-2" point={20} reviewCount={4.2}/>
+              <div className="flex flex-grow justify-center space-x-2 mt-3">
+                <Link to={`/restaurant/${data.id}`}>
+                  <ButtonPrimary className="rounded-lg px-4 py-2 md:px-4 md:py-2">Order Now</ButtonPrimary>
+                </Link>
+                <Link to={`/reservation/${data.id}`}>
+                  <ButtonSecondary className="rounded-lg px-4 py-2 md:px-4 md:py-2">Reserve Now</ButtonSecondary> 
+                </Link>
+              </div>
+
       </div>
     );
   };

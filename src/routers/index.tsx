@@ -67,14 +67,14 @@ export const pages: Page[] = [
   { path: "/restaurant", exact: true, component: AllRestaurant },
   { path: "/restaurant/:id", exact: false, component: Restaurant },
   { path: "/order-tracking", exact: false, component: OrderTracker },
-  { path: "/reservation", exact: true, component: TableReservation },
+  { path: "/reservation/:id", exact: false, component: TableReservation },
   { path: "/chat", exact: true, component: Chat },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },
   // { path: "/home-3", component: PageHome3 },
 
   // { path: "/listing-stay", component: ListingStayPage },
-  { path: "/listing-stay-map", component: ListingStayMapPage },
+  // { path: "/listing-stay-map", component: ListingStayMapPage },
   // { path: "/listing-stay-detail", component: ListingStayDetailPage },
 
   // {
@@ -90,7 +90,7 @@ export const pages: Page[] = [
   //   component: ListingExperiencesDetailPage,
   // },
 
-  { path: "/listing-car", component: ListingCarPage },
+  // { path: "/listing-car", component: ListingCarPage },
   // { path: "/listing-car-map", component: ListingCarMapPage },
   // { path: "/listing-car-detail", component: ListingCarDetailPage },
 

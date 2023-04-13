@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { GoogleMap, DirectionsService, DirectionsRenderer, Marker } from '@react-google-maps/api';
 import ReactDOMServer from 'react-dom/server';
+import { useLoadScript } from '@react-google-maps/api';
 import { FaMapMarkerAlt } from 'react-icons/fa'
 // const defaultOptions = {
 //   destination: 'Mannar, Sri Lanka',
@@ -80,7 +81,12 @@ const MapWithDirections:FC <MapWithDirectionsProps> = React.memo(({defaultOption
         setDirectionsError(true);
       }
     }, []);
-  
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyDUKgGWyiP8pUtLzm2f7ajBoBAIoehkV-A'
+  });
+
+  if (loadError) return <div>Error loading maps</div>;
+  if (!isLoaded) return <div>Loading maps</div>;
     return (
       <GoogleMap
         center={{ lat: 37.7749, lng: -122.4194 }}

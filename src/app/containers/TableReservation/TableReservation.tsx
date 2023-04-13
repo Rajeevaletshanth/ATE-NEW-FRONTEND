@@ -3,7 +3,9 @@ import { HiSearch } from 'react-icons/hi'
 import Input from 'shared/Input/Input'
 import reserved from '../../images/reserved6.jpg'
 import Label from 'components/Label/Label'
-
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import DateInput from './DateInput'
 import GuestsInput from './GuestsInput'
 import TimeInput from './TimeInput'
@@ -22,6 +24,11 @@ const MySwal = withReactContent(Swal);
 
 const TableReservation = () => {
 
+ const { id } = useParams();
+ const navigate = useNavigate();
+
+ const user_id = useSelector((state:any) => state.auth.user.id)
+
  const [dateValue, setdateValue] = useState<moment.Moment | null>(null);
  const [dateFocused, setDateFocused] = useState<boolean>(false);
 
@@ -39,9 +46,11 @@ const TableReservation = () => {
  const [timezone, setTimezone] = useState<any>("Europe/Rome")
 
  const getRestaurantData = async() => {
-    const response = await getRestaurantApi(1);
+    const response = await getRestaurantApi(id);
     if(response.data.response === "success"){
         setRestaurantData(response.data.restaurant[0])
+    }else{
+        navigate('/')
     }
  }
 
@@ -109,7 +118,7 @@ const TableReservation = () => {
 
     const data = {
         table_ids: table_ids,
-        user_id: 1,
+        user_id: user_id,
         guests_count: totalGuests,
         reservation_date: date,
         reservation_from: res_from,
@@ -117,14 +126,14 @@ const TableReservation = () => {
         timezone: timezone,
         note: note
     }
-    const response = await reserveTable(1,data);
+    const response = await reserveTable(id,data);
     if(response.data.response === "success"){
         renderAvailableTables(response.data.data, response.data.qrcode, selectedTables)
     }else{
         renderEmptyMessage();
     }
     
-    console.log(response.data) 
+    // console.log(response.data) 
   }
   
 
@@ -142,7 +151,7 @@ const TableReservation = () => {
         reservation_to: res_to,
         timezone: timezone
     }
-    const response = await checkTableAvailability(1,data)
+    const response = await checkTableAvailability(id,data)
     if(response.data.response === "success"){
         checkTotalSeats(response.data.tables, guestValue)
         // renderEmptyMessage()
@@ -162,6 +171,9 @@ const TableReservation = () => {
 
  useEffect(() => {
     getRestaurantData()
+    if(!user_id){
+        navigate('/login')
+    }
  },[])
 
  const convertToMinutesPastMidnight = (timeString: string) => {
@@ -244,7 +256,8 @@ const TableReservation = () => {
                     `QR Code - Reservation ${reservation.id}`
                 )
             }
-            window.location.reload();
+            navigate('/myorders')
+            // window.location.reload();
         })
     }
 
