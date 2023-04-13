@@ -5,18 +5,29 @@ import config from "../config/config.json"
 export const loginApi = (data) => {
     return new Promise((resolve,reject)=>{
         axios.post(`${config.SERVER_URL}/user/login`,data)
-        .then((res) =>{  
+        .then((res) =>{
             resolve(res)
         }).catch((res) => {
             reject(res)
         })
     })
-
-}         
+}
 
 export const userRegister = (data) => {
     return new Promise((resolve,reject)=>{
         axios.post(`${config.SERVER_URL}/user/register`,data).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
+
+export const editUserApi = (id,data,token) => {
+    return new Promise((resolve,reject)=>{
+        axios.put(`${config.SERVER_URL}/user/edit/${id}`,data,{
+            headers: { 'Authorization':`Bearer ${token}` }
+        }).then((res) =>{
             resolve(res)
         }).catch((res) => {
             reject(res)
@@ -33,8 +44,7 @@ export const logoutApi = () => {
             reject(res)
         })
     })
-
-} 
+}
 
 export const forgotPasswordApi = (email) => {
     return new Promise((resolve,reject)=>{
@@ -45,8 +55,7 @@ export const forgotPasswordApi = (email) => {
             reject(res)
         })
     })
-
-} 
+}
 
 export const resetPasswordApi = (id,token,data) => {
     return new Promise((resolve,reject)=>{
@@ -57,6 +66,5 @@ export const resetPasswordApi = (id,token,data) => {
             reject(res)
         })
     })
-
-} 
+}
 

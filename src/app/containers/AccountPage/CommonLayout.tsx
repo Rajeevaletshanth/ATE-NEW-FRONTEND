@@ -13,7 +13,8 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
       <Authenticate />
       <div className="border-b border-neutral-200 dark:border-neutral-700 pt-12 bg-white dark:bg-neutral-800">
         <div className="container">
-          <div className="flex space-x-8 md:space-x-14 overflow-x-auto hiddenScrollbar">
+          <div className="flex space-x-8 md:space-x-14 overflow-x-auto ">
+            {/* hiddenScrollbar */}
             <NavLink
               to="/account"
               className={({ isActive }) =>

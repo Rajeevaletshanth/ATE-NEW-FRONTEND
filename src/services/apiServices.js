@@ -10,6 +10,7 @@ const header=()=>{
     }
 }
 
+//Get image
 export const getAvatar = (avatar) => {
     return new Promise((resole, reject) => {
         axios({
@@ -23,6 +24,21 @@ export const getAvatar = (avatar) => {
             resole({response:"error", file: avatar})
         })
     }) 
+}
+
+//Upload image
+export async function uploadFile(data) {
+    return new Promise((resolve, reject) => {
+        const formdata = new FormData(); 
+        formdata.append('file', data[0]);
+        axios.post(`${config.SERVER_URL}/uploadSingle`, formdata,{
+          headers: { "Content-Type": "multipart/form-data" }
+        }).then((res) => {
+            resolve(res.data.filename)    
+        }).catch((err) => {
+            reject(err)
+        })
+    })
 }
 
 //Top Brands
