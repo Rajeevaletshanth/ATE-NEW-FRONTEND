@@ -12,6 +12,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "shared/Avatar/Avatar";
 import useAuth from 'utils/hooks/useAuth'
+import { useNavigate } from 'react-router-dom';
 
 const solutions = [
   {
@@ -55,9 +56,12 @@ export interface AvatarDropdownProps {
 
 
 const AvatarDropdown: FC<AvatarDropdownProps> = ({ imgUrl }) => {
+  const navigate = useNavigate();
   const { signOut } = useAuth();
   const handleSignout = async() => {
-    await signOut()
+    await signOut().then(() => {
+      navigate('/login')
+    })
   }
   return (
     <div className="AvatarDropdown">

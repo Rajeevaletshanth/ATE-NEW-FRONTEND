@@ -3,6 +3,7 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import imagePng from "images/hero-right.png";
 import HeroSearchForm from "../../components/HeroSearchForm/HeroSearchForm";
 
+
 export interface SectionHeroProps {
   className?: string;
 }
@@ -18,6 +19,7 @@ const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
           <h2 className="font-medium text-2xl md:text-4xl xl:text-5xl !leading-[114%] text-gray-100 text-center">
             Discover the best food & drink
           </h2>
+          
           {/* <span className="text-base md:text-lg text-neutral-500 dark:text-neutral-400">
             Accompanying us, you have a trip full of experiences. With Chisfis, booking accommodation, resort villas, hotels
           </span> */}

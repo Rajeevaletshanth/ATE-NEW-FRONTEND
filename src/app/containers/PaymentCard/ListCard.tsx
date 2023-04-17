@@ -51,11 +51,6 @@ const ListCard: FC<ListCardProps> = ({ refresh, setRefresh, setCardList }) => {
                     size="normal"
                     removeCard={removeCard}
                 />
-                // <div className='bg-'>
-                //     <span>•••• •••• •••• {item.last_four_digits}</span>
-
-                //     {item.card_holder_name}
-                // </div>
             )
         })
         :

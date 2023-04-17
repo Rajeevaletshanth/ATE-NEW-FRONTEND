@@ -78,7 +78,6 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
     }else{
       swal("Sorry", "Please select a PNG, JPEG or WebP image file.", "error");
     }
-
   }
 
   return (
@@ -88,7 +87,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
       </Helmet>
       <CommonLayout>
         <div className="pt-1 pb-1  rounded-2xl">
-          <div className="container relative space-y-4 mb-24 mt-4 lg:space-y-4 lg:mb-28">
+          <div className="relative space-y-4 mb-24 mt-4 lg:space-y-4 lg:mb-28">
             <div className="space-y-6 sm:space-y-8">
               <div className="w-full sm:px-20">
                   <Heading children="Edit User Information" isCenter={false} />

@@ -15,7 +15,7 @@ const AccountBilling = () => {
     <div>
       <CommonLayout>
         <div className="pt-1 pb-1  rounded-2xl">
-          <div className="container relative space-y-4 mb-24 mt-4 lg:space-y-4 lg:mb-28">
+          <div className="relative space-y-4 mb-24 mt-4 lg:space-y-4 lg:mb-28">
             <div className="space-y-6 sm:space-y-8">
               {/* <h2 className="text-3xl font-semibold">Payments & payouts</h2> */}
               
@@ -28,7 +28,6 @@ const AccountBilling = () => {
                   <div className="pt-10 flex justify-center">
                     <PaymentCardModal refresh={refresh} setRefresh={setRefresh} cards={cards}/>
                   </div>
-
               </div>
             </div>
           </div>

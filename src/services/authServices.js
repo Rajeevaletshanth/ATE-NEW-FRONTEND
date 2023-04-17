@@ -1,6 +1,18 @@
 import axios from "axios";
 import config from "../config/config.json"
 
+export const authApi = (token) => {
+    return new Promise((resolve,reject)=>{
+        axios.get(`${config.SERVER_URL}/user/validate`,{
+            headers: { 'Authorization':`Bearer ${token}` }
+        })
+        .then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}
 
 export const loginApi = (data) => {
     return new Promise((resolve,reject)=>{
@@ -68,3 +80,14 @@ export const resetPasswordApi = (id,token,data) => {
     })
 }
 
+export const changePasswordApi = (id,data,token) => {
+    return new Promise((resolve,reject)=>{
+        axios.put(`${config.SERVER_URL}/user/change_password/${id}`,data,{
+            headers: { 'Authorization':`Bearer ${token}` }
+        }).then((res) =>{
+            resolve(res)
+        }).catch((res) => {
+            reject(res)
+        })
+    })
+}

@@ -30,7 +30,9 @@ function useAuth() {
 						dispatch(setUser({
 							id: resp.data.user.id,
 							avatar: resp.data.user.avatar, 
-							username: resp.data.user.username, 
+							username: resp.data.user.username,
+							phone: resp.data.user.phone,
+							address: resp.data.user.address, 
 							authority: JSON.parse(resp.data.user.authority).role, 
 							email: resp.data.user.email
 						}))				

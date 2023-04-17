@@ -127,24 +127,24 @@ const PaymentCardModal:FC <PaymentCardProps> = ({className, refresh, cards, butt
                   </div>
                   <div className="relative p-6 flex-auto">
                     {error && <div className="bg-primary-100 text-primary-500 rounded-xl p-3 mx-2">{error}</div>}
-                  <div className='p-2 text-left'>
-                    <label className='ml-3 font-semibold  text-sm'>Cardholder's Name</label>
-                    <Input onChange={(e) => setName(e.target.value)} type="text" placeholder="Eg. John Doe"/>
-                </div>
-                <div className='p-2 text-left'>
-                    <label  className='ml-3 font-semibold text-sm'>Credit Card Number</label>
-                    <Input type="text"  onChange={(e) => setCardNumber(e.target.value)} minLength={16} maxLength={20} placeholder="•••• •••• •••• 4242"/>
-                </div>
-                <div className="flex flex-row">
-                    <div className='p-2 text-left'>
-                        <label  className='ml-3 font-semibold text-sm'>Expiry Date</label>
-                        <Input onChange={(e) => setExpiryDate(e.target.value)} type="month" min={minMonth} placeholder="Month/Year"/>
-                    </div>
-                    <div className='p-2 text-left'>
-                        <label  className='ml-3 font-semibold text-sm'>CVV</label>
-                        <Input onChange={(e) => setCvv(e.target.value)} minLength={3} maxLength={4} placeholder="•••"/>
-                     </div>
-                </div>
+                      <div className='p-2 text-left'>
+                        <label className='ml-3 font-semibold  text-sm'>Cardholder's Name</label>
+                        <Input onChange={(e) => setName(e.target.value)} type="text" placeholder="Eg. John Doe"/>
+                      </div>
+                      <div className='p-2 text-left'>
+                        <label  className='ml-3 font-semibold text-sm'>Credit Card Number</label>
+                        <Input type="text"  onChange={(e) => setCardNumber(e.target.value)} minLength={16} maxLength={20} placeholder="•••• •••• •••• 4242"/>
+                      </div>
+                      <div className="flex flex-row">
+                        <div className='p-2 text-left'>
+                            <label  className='ml-3 font-semibold text-sm'>Expiry Date</label>
+                            <Input onChange={(e) => setExpiryDate(e.target.value)} type="month" min={minMonth} placeholder="Month/Year"/>
+                        </div>
+                        <div className='p-2 text-left'>
+                            <label  className='ml-3 font-semibold text-sm'>CVV</label>
+                            <Input onChange={(e) => setCvv(e.target.value)} minLength={3} maxLength={4} placeholder="•••"/>
+                        </div>
+                      </div>
                   </div>
                   {/*footer*/}
                   <div className="flex items-center justify-center p-6 space-x-2  rounded-b">

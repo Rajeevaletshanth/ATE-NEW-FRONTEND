@@ -4,6 +4,8 @@ export const initialState = {
     avatar: '',
     userName: '',
     email: '',
+    phone: '',
+    address: '',
     authority: []
 }
 
