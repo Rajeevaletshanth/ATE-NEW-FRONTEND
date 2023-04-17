@@ -41,7 +41,7 @@ export interface AddressCardModalProps {
 
 const AddressCardModal:FC <AddressCardModalProps> = ({className, refresh, buttonText = "Add New Address", setRefresh}) => {
 
-   const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const { id, username, email, address, phone, avatar, authority } = useSelector((state:any) => state.auth.user)
     const { token } = useSelector((state:any) => state.auth.session)
     const [showModal, setShowModal] = React.useState(false);
