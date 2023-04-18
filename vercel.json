@@ -1,6 +1,6 @@
 {
-  "build": {
-    "include": ["vercel.json"]
+  "build" : {
+    "include" : ["vercel.json"]
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites" : [{ "source": "/(.*)", "destination": "/index.html" }]
 }
