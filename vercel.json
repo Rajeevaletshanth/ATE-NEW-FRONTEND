@@ -1,6 +1,3 @@
 {
-  "build": {
-    "include": ["vercel.json"]
-  },
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
