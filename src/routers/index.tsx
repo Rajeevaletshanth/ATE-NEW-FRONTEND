@@ -4,29 +4,29 @@ import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
 
 import Footer from "shared/Footer/Footer";
-import PageHome from "containers/PageHome/PageHome";
+// import PageHome from "containers/PageHome/PageHome";
 import Page404 from "containers/Page404/Page404";
 // import ListingStayPage from "containers/ListingStayPage/ListingStayPage";
-import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
-import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
+// import ListingStayMapPage from "containers/ListingStayPage/ListingStayMapPage";
+// import ListingExperiencesPage from "containers/ListingExperiencesPage/ListingExperiencesPage";
 // import ListingExperiencesMapPage from "containers/ListingExperiencesPage/ListingExperiencesMapPage";
 // import ListingStayDetailPage from "containers/ListingDetailPage/ListingStayDetailPage";
 // import ListingExperiencesDetailPage from "containers/ListingDetailPage/ListingExperiencesDetailPage";
-import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
+// import ListingCarPage from "containers/ListingCarPage/ListingCarPage";
 // import ListingCarMapPage from "containers/ListingCarPage/ListingCarMapPage";
 // import ListingCarDetailPage from "containers/ListingDetailPage/ListingCarDetailPage";
 // import CheckOutPage from "containers/CheckOutPage/CheckOutPage";
-import CheckOutPage from "app/containers/CheckOutPage/CheckOutPage";
-import PayPage from "app/containers/PayDonePage/PayPage";
+// import CheckOutPage from "app/containers/CheckOutPage/CheckOutPage";
+// import PayPage from "app/containers/PayDonePage/PayPage";
 // import AuthorPage from "containers/AuthorPage/AuthorPage";
-import AccountPage from "app/containers/AccountPage/AccounPage";
-import AccountPass from "app/containers/AccountPage/AccountPass";
-import AccountSavelists from "app/containers/AccountPage/AccountSavelists";
-import AccountBilling from "app/containers/AccountPage/AccountBilling";
-import Favourite from "app/containers/AccountPage/Favourite";
-import ManageAddress from "app/containers/AccountPage/ManageAddress";
-import MyOrders from "app/containers/AccountPage/MyOrders";
-import Referal from "app/containers/AccountPage/Referal";
+// import AccountPage from "app/containers/AccountPage/AccounPage";
+// import AccountPass from "app/containers/AccountPage/AccountPass";
+// import AccountSavelists from "app/containers/AccountPage/AccountSavelists";
+// import AccountBilling from "app/containers/AccountPage/AccountBilling";
+// import Favourite from "app/containers/AccountPage/Favourite";
+// import ManageAddress from "app/containers/AccountPage/ManageAddress";
+// import MyOrders from "app/containers/AccountPage/MyOrders";
+// import Referal from "app/containers/AccountPage/Referal";
 import PageContact from "containers/PageContact/PageContact";
 // import PageAbout from "containers/PageAbout/PageAbout";
 import PageSignUp from "containers/PageSignUp/PageSignUp";
@@ -53,22 +53,22 @@ import FooterNav from "components/FooterNav";
 import useWindowSize from "hooks/useWindowResize";
 // import PageHome3 from "containers/PageHome/PageHome3";
 
-import Dashboard from "app/containers/Dashboard/Dashboard";
-import Restaurant from "app/containers/Restaurant/Restaurant";
-import AllRestaurant from "app/containers/Restaurant/AllRestaurant";
+// import Dashboard from "app/containers/Dashboard/Dashboard";
+// import Restaurant from "app/containers/Restaurant/Restaurant";
+// import AllRestaurant from "app/containers/Restaurant/AllRestaurant";
 
-import Chat from "app/containers/Chat/Chat";
-import OrderTracker from "app/containers/OrderTracker/OrderTracker";
-import TableReservation from "app/containers/TableReservation/TableReservation";
+// import Chat from "app/containers/Chat/Chat";
+// import OrderTracker from "app/containers/OrderTracker/OrderTracker";
+// import TableReservation from "app/containers/TableReservation/TableReservation";
 
 export const pages: Page[] = [
-  { path: "/", exact: true, component: Dashboard },
-  { path: "/#", exact: true, component: Dashboard },
-  { path: "/restaurant", exact: true, component: AllRestaurant },
-  { path: "/restaurant/:id", exact: false, component: Restaurant },
-  { path: "/order-tracking", exact: false, component: OrderTracker },
-  { path: "/reservation/:id", exact: false, component: TableReservation },
-  { path: "/chat", exact: true, component: Chat },
+  // { path: "/", exact: true, component: Dashboard },
+  // { path: "/#", exact: true, component: Dashboard },
+  // { path: "/restaurant", exact: true, component: AllRestaurant },
+  // { path: "/restaurant/:id", exact: false, component: Restaurant },
+  // { path: "/order-tracking", exact: false, component: OrderTracker },
+  // { path: "/reservation/:id", exact: false, component: TableReservation },
+  // { path: "/chat", exact: true, component: Chat },
   // { path: "/home-1-header-2", exact: true, component: PageHome },
   // { path: "/home-2", component: PageHome2 },
   // { path: "/home-3", component: PageHome3 },
@@ -99,19 +99,19 @@ export const pages: Page[] = [
 
   // { path: "/listing-flights", component: ListingFlightsPage },
 
-  { path: "/checkout", component: CheckOutPage },
-  { path: "/pay-done", component: PayPage },
+  // { path: "/checkout", component: CheckOutPage },
+  // { path: "/pay-done", component: PayPage },
   
 
   // { path: "/author", component: AuthorPage },
-  { path: "/account", component: AccountPage },
-  { path: "/password-settings", component: AccountPass },
-  { path: "/savelists", component: AccountSavelists },
-  { path: "/billing", component: AccountBilling },
-  {path: "/favourite", component: Favourite},
-  {path: "/manage-address", component: ManageAddress},
-  {path: "/myorders", component: MyOrders},
-  {path: "/referal", component: Referal},
+  // { path: "/account", component: AccountPage },
+  // { path: "/password-settings", component: AccountPass },
+  // { path: "/savelists", component: AccountSavelists },
+  // { path: "/billing", component: AccountBilling },
+  // {path: "/favourite", component: Favourite},
+  // {path: "/manage-address", component: ManageAddress},
+  // {path: "/myorders", component: MyOrders},
+  // {path: "/referal", component: Referal},
 
 
 
