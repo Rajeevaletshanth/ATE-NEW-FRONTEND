@@ -27,7 +27,7 @@ import Favourite from "app/containers/AccountPage/Favourite";
 import ManageAddress from "app/containers/AccountPage/ManageAddress";
 import MyOrders from "app/containers/AccountPage/MyOrders";
 import Referal from "app/containers/AccountPage/Referal";
-// import PageContact from "containers/PageContact/PageContact";
+import PageContact from "containers/PageContact/PageContact";
 // import PageAbout from "containers/PageAbout/PageAbout";
 import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageLogin from "containers/PageLogin/PageLogin";
@@ -129,7 +129,7 @@ export const pages: Page[] = [
   // { path: "/add-listing-9", component: PageAddListing9 },
   // { path: "/add-listing-10", component: PageAddListing10 },
 
-  // { path: "/contact", component: PageContact },
+  { path: "/contactus", component: PageContact },
   // { path: "/about", component: PageAbout },
   { path: "/signup", component: PageSignUp },
   { path: "/login", component: PageLogin },

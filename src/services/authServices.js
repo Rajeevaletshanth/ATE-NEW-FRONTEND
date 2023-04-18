@@ -87,6 +87,7 @@ export const changePasswordApi = (id,data,token) => {
         }).then((res) =>{
             resolve(res)
         }).catch((res) => {
+            console.log(res)
             reject(res)
         })
     })

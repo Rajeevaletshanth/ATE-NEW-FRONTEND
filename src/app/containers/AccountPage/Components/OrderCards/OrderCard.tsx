@@ -50,19 +50,25 @@ const OrderCard: FC<OrderCardProps> = ({ data }) => {
           <p className="text-xs  text-gray-700 dark:text-gray-400 text-left">
             Delivery : {data.delivery_address}
           </p>
+          <p className="text-xs  text-gray-700 dark:text-gray-400 text-left">
+            Date : {data.order_date}
+          </p>
           <p className="text-xs text-gray-700 dark:text-gray-400 text-left hidden md:flex">
             Order No : {data.order_number}
           </p>
           <div className="text-sm font-semibold text-primary-500 cursor-pointer hover:underline" onClick={()=>setShowData(!showData)}>{showData? "Hide Details": "View Details"}</div>
-          <div className="flex flex-col rounded-2xl space-x-2 md:space-x-4 p-2 md:p-3 border border-gray-200 dark:border-gray-700">
+          {showData && <div className="flex flex-col">
             {data.items.map((prod:any, key:number) => {
                 return(
-                    <div className="flex flex-row space-x-2 md:space-x-4">
-                        <Avatar
-                            sizeClass="w-20 h-20"
-                            radius="rounded-2xl"
-                            imgUrl={prod.product.avatar}
-                        />
+                    <>
+                    <div className="flex flex-col md:flex-row md:space-x-4 ml-2 my-1">
+                        <div className="hidden md:flex">
+                            <Avatar
+                                sizeClass="w-20 h-20"
+                                radius="rounded-2xl"
+                                imgUrl={prod.product.avatar}
+                            />
+                        </div>
                         <div className="flex flex-col">
                             <p className="text-xs md:text-sm font-medium text-gray-900 dark:text-gray-200 mb-1 text-left">
                                 {prod.product.name}
@@ -78,35 +84,27 @@ const OrderCard: FC<OrderCardProps> = ({ data }) => {
                               </div>
                               </>
                             }
-                        </div>
-                        
+                            <p className="text-xs font-medium text-gray-900 dark:text-gray-200 mb-1 text-left">
+                              Quantity : {prod.quantity}
+                            </p>
+                        </div> 
                     </div>
+                    <div className="border-b border-dashed border-neutral-200 dark:border-neutral-700 mt-4 mb-4" style={{borderWidth: '0 0 2px 2px', borderStyle: 'dashed', }}></div>
+                    </>
                 )
             })}
-{/* {item.addons && item.addons.length > 0 && (
-            <>
-              <div className="flex flex-row flex-wrap text-xs">
-                Addons :
-                {item.addons.map((addon: any) => {
-                  itemPrice += addon.price * item.quantity;
-                  return (
-                    <p className="text-xs bg-primary-400 rounded px-1 text-white ml-1 mr-1 mb-1">
-                      {" "}
-                      {addon.label}
-                    </p>
-                  );
-                })}
-              </div>
-            </>
-          )}
-          <p className="text-xs font-medium text-gray-900 dark:text-gray-200 mb-1 text-left">
-            Quantity : {item.quantity}
-          </p>
-        </div>
-        <div className="text-lg ml-4">
-          €<span className="">{itemPrice}</span>
-        </div> */}
-          </div>
+            <div className="flex flex-col space-y-4 mx-6">
+                      
+                <div className="flex justify-between text-neutral-6000 dark:text-neutral-300" >
+                        <span>Delivery Charge</span>
+                        <span>{data.delivery_fee}</span>
+                    </div>
+                    <div className="flex justify-between font-semibold">
+                          <span className="text-xl">Total</span>
+                          <span className="text-xl font-bold text-primary-500">€ {data.total_amount}</span>
+                    </div>
+                </div>
+          </div>}
           
       </div>
     </div>

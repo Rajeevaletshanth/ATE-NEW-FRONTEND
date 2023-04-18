@@ -20,7 +20,7 @@ const info = [
   },
   {
     title: "💌 EMAIL",
-    desc: "nc.example@example.com",
+    desc: "admin@ate.com",
   },
   {
     title: "☎ PHONE",

@@ -61,7 +61,7 @@ export interface LocationStates {
   "/author"?: {};
   "/search"?: {};
   "/about"?: {};
-  "/contact"?: {};
+  "/contactus"?: {};
   "/login"?: {};
   "/signup"?: {};
   "/forgot-pass"?: {};
