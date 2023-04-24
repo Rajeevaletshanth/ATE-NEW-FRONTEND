@@ -101,7 +101,7 @@ const OrderCard: FC<OrderCardProps> = ({ data }) => {
                     </div>
                     <div className="flex justify-between font-semibold">
                           <span className="text-xl">Total</span>
-                          <span className="text-xl font-bold text-primary-500">€ {data.total_amount}</span>
+                          <span className="text-xl font-bold text-primary-500">€ {Math.round((data.total_amount) * 100) / 100}</span>
                     </div>
                 </div>
           </div>}

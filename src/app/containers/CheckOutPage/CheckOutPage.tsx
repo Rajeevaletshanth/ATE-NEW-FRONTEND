@@ -34,6 +34,7 @@ import { useNavigate } from "react-router-dom";
 import { emptyCart } from "store/cart/itemsSlice";
 
 import config from '../../../config/config.json'
+import { calcLength } from "framer-motion";
 const socket = require("socket.io-client")(config.SOCKET_URL, {
   rejectUnauthorized: true 
 });
@@ -50,11 +51,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false)
   const { products } = useSelector((state: any) => state.cart.items)
-  const { id } = useSelector((state: any) => state.auth.user)
+  const { id, phone, address } = useSelector((state: any) => state.auth.user)
   const [deliveryCharge, setDeliveryCharge] = useState<any>(10);
   const [refresh, setRefresh] = useState<boolean>(false)
-  const [address, setAddress] = useState<string>("");
-  const [phoneNo, setPhoneNo] = useState<string>("")
+  const [addr, setAddress] = useState<string>("");
+  const [phoneNo, setPhoneNo] = useState<string>(phone !== null? phone:"")
   const [deliveryType, setDeliveryType] = useState<string>("delivery")
   const [addressLabel, setAddressLabel] = useState<string>("")
   const [deliverOption, setDeliverOption] = useState<string>("")
@@ -99,13 +100,23 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           }
           tempPrice += (itemPrice + addonPrice)*item.quantity
       })
-      setTotal(tempPrice)
+      setTotal(Math.round(tempPrice * 100) / 100)
     }
   },[products, refresh])
 
   useEffect(() => {
     if(products?.length === 0){
       navigate('/')
+    }
+    if(localStorage.getItem("activeTab")){
+      const actTab = localStorage.getItem("activeTab")
+      if(actTab === "Delivery"){
+        setDeliveryType("delivery")
+      }else if(actTab === "Pickup"){
+        setDeliveryType("pickup")
+      }else{
+        setDeliveryType("delivery")
+      }
     }
   },[])
 
@@ -176,7 +187,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
           total_amount : tempPrice,
           status : "pending",
           order_type : deliveryType,
-          delivery_address : address,
+          delivery_address : addr,
           phone_no : phoneNo
         }
       })
@@ -267,7 +278,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                   <div className="text-center mb-4" hidden={deliveryType === "delivery"? false: true}>
                     <p className="text-sm font-medium">Delivered to</p>
                     <div className="border-b border-neutral-200 dark:border-neutral-700 w-1/12 mx-auto border-primary-500 mb-2"></div> 
-                    <p  className="text-xs">{address}</p>
+                    <p  className="text-xs">{addr}</p>
                     <p  className="text-xs">{phoneNo}</p>
                   </div>  
 
@@ -308,7 +319,8 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                               </svg>
                             </span>
                     </a>
-                  )})}
+                  )
+                  })}
                   </div>
                   {products.length > 0 && <>
                     <div className="flex flex-col space-y-4">
@@ -326,7 +338,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
                       <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
                       <div className="flex justify-between font-semibold">
                         <span>Total</span>
-                        <span className="text-2xl font-bold text-primary-500">€ {total + (deliveryType === "delivery"? deliveryCharge: 0)}</span>
+                        <span className="text-2xl font-bold text-primary-500">€ {Math.round((total + (deliveryType === "delivery"? deliveryCharge: 0)) * 100) /100}</span>
                       </div>
                     </div>
                     {/* <ButtonPrimary  sizeClass="p-2 rounded-xl mt-6 disabled:bg-gray-800" onClick={handlePayment}>Make Payment</ButtonPrimary> */}
@@ -371,6 +383,11 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
       setCardConfirm(false);
     }
 
+    const handleAddressLabel = (e:any, item:any) => {
+      setAddress(item.address)
+      setAddressLabel(e.target.value)
+    }
+
     return (
       <>
       {/* Contact Details */}
@@ -380,27 +397,26 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         <div>
           <form onSubmit={handleContactConfirm}>
             <h3 className="text-lg font-semibold">Contact Information</h3>
+            
+            {/* <h3 className="text-lg font-semibold mt-6">Address Label (Optional)</h3> */}
+            {address && <div className="flex items-center mt-6 space-x-6">
+              {JSON.parse(address)?.map((item:any) => {
+                return <label className="inline-flex items-center">
+                        <input type="radio" checked={addressLabel === item.type} onChange={(e:any) => handleAddressLabel(e, item)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="deliver" value={item.type} />
+                        <span className="ml-4">{item.type}</span>
+                      </label>
+              })}
+            </div>}
+
             <div className="mt-6">
                   <div className="space-y-1">
                     <Label>Address </Label>
-                    <Input required minLength={5} maxLength={100} placeholder="Delivery Address" value={address} onChange={(e) => setAddress(e.target.value)}/>
+                    <Input required minLength={5} maxLength={100} placeholder="Delivery Address" value={addr} onChange={(e) => setAddress(e.target.value)}/>
                   </div>
                   <div className="space-y-1 mt-4">
                     <Label>Phone Number </Label>
                     <Input required minLength={9} maxLength={15} placeholder="Eg. 0123456789" value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)}/>
                   </div>
-            </div>
-
-            <h3 className="text-lg font-semibold mt-6">Address Label (Optional)</h3>
-            <div className="flex items-center mt-6">
-              <label className="inline-flex items-center">
-                <input type="radio" checked={addressLabel === 'home'} onChange={(e) => setAddressLabel(e.target.value)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="deliver" value="home" />
-                <span className="ml-4">Home</span>
-              </label>
-              <label className="inline-flex items-center ml-6">
-                <input type="radio" checked={addressLabel === 'work'} onChange={(e) => setAddressLabel(e.target.value)} className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500" name="deliver" value="work"/>
-                <span className="ml-4">Work</span>
-              </label>
             </div>
 
             <h3 className="text-lg font-semibold mt-6">Deliver to (Optional)</h3>

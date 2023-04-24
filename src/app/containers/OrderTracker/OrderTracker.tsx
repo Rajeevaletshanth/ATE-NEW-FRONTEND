@@ -152,7 +152,7 @@ const OrderTracker:FC <OrderTrackerProps> = ({className}) => {
                 </div>
                 <div className="flex flex-row px-4 mt-4">
                     <p className='w-5/12 text-gray-900 dark:text-white font-semibold '>Total : </p>
-                    <p className='w-7/12 text-gray-600 dark:text-gray-300'>€ {orderDetails.total_amount}</p>
+                    <p className='w-7/12 text-gray-600 dark:text-gray-300'>€ {Math.round((orderDetails.total_amount) * 100) / 100}</p>
                 </div>
             </div>
             <div className="bg-white rounded-2xl md:mt-6 p-0  max-h-xs">

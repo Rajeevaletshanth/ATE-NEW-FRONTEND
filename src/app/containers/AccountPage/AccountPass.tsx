@@ -14,7 +14,8 @@ const AccountPass = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error,setError] = useState("")
 
-  const { id, token } = useSelector((state:any) => state.auth.user)
+  const { id } = useSelector((state:any) => state.auth.user)
+  const { token } = useSelector((state:any) => state.auth.session)
 
   const handleSubmit = async(e:any) => {
     e.preventDefault()

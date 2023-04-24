@@ -54,7 +54,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
           }
           tempPrice += (itemPrice + addonPrice)*item.quantity
       })
-      setTotal(tempPrice)
+      setTotal(Math.round(tempPrice * 100) / 100)
     }
   },[products])
 

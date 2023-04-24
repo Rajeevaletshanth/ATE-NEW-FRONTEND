@@ -60,33 +60,41 @@ const AddressCardModal:FC <AddressCardModalProps> = ({className, refresh, button
         setLoading(false)
       }else{
         var tempAddress: any = []
+        var typeExists = false
         if(address){
           const prevAddresses = JSON.parse(address)
           tempAddress = [...prevAddresses, {uid: createUID(5), type: type, address: newAddress}]
+          typeExists = prevAddresses.some((prevAddress:any) => prevAddress.type === type);
         }else{
           tempAddress = [{uid: createUID(5), type: type, address: newAddress}]
         }
-        const data = {
-          address : tempAddress,
-        }
-        const response = await editUserApi(id, data, token)
-        if(response.data.response === "success"){
-          swal("Success", "Address updated successfully", "success")
-          dispatch(setUser({
-            id: id,
-            avatar: avatar, 
-            username: username, 
-            authority: authority, 
-            address: JSON.stringify(tempAddress),
-            email: email,
-            phone: phone,
-          }))
-          setRefresh(!refresh)
-          setLoading(false)
-          setShowModal(false)
+
+        if(!typeExists){
+          const data = {
+            address : tempAddress,
+          }
+          const response = await editUserApi(id, data, token)
+          if(response.data.response === "success"){
+            swal("Success", "Address updated successfully", "success")
+            dispatch(setUser({
+              id: id,
+              avatar: avatar, 
+              username: username, 
+              authority: authority, 
+              address: JSON.stringify(tempAddress),
+              email: email,
+              phone: phone,
+            }))
+            setRefresh(!refresh)
+            setLoading(false)
+            setShowModal(false)
+          }else{
+            swal("Sorry", "Sorry address not updated!", "error");
+            setLoading(false)
+          }
         }else{
-          swal("Sorry", "Sorry address not updated!", "error");
-          setLoading(false)
+          swal("Sorry", `You've already set ${type} address!`, "warning");
+            setLoading(false)
         }
       }
     }

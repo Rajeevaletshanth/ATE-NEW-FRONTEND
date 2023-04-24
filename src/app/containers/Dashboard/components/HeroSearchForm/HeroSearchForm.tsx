@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import ExperiencesSearchForm from "./ExperiencesSearchForm";
 import StaySearchForm from "./StaySearchForm";
 import RentalCarSearchForm from "./RentalCarSearchForm";
@@ -23,14 +23,30 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
   // ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50
   // text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-400
+  useEffect(() => {
+    if(localStorage.getItem("activeTab")){
+      const actTab = localStorage.getItem("activeTab")
+      if(actTab === "Delivery"){
+        setTabActive("Delivery")
+      }else if(actTab === "Pickup"){
+        setTabActive("Pickup")
+      }else{
+        setTabActive("Dining")
+      }
+    }
+  },[])
   const renderTab = () => {
+        const handleTabActive = (tab:any) => {
+      setTabActive(tab)
+      localStorage.setItem("activeTab",tab)
+    }
     return (
         <ul className="space-x-5 sm:space-x-8 lg:space-x-11 flex justify-center">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
               <button
-                onClick={() => setTabActive(tab)}
+                onClick={() => handleTabActive(tab)}
                 className={`text-gray-100 hover:bg-gray-100 hover:text-gray-900 rounded-full px-5 py-2 ${
                   active
                     ? "bg-red-600 hover:bg-red-500 hover:text-gray-100"

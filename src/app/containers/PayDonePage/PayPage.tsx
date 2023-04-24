@@ -147,7 +147,7 @@ const PayPage: FC<PayPageProps> = ({ className = "" }) => {
                       </div>
                       <div className="flex justify-between font-semibold">
                         <span className="text-xl">Total</span>
-                        <span className="text-xl font-bold text-primary-500">€ {order_details[productKey].total_amount}</span>
+                        <span className="text-xl font-bold text-primary-500">€ {Math.round((order_details[productKey].total_amount) * 100) / 100 }</span>
                       </div>
                     </div>
                   </>

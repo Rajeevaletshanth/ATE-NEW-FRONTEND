@@ -103,7 +103,7 @@ const RestaurantProducts: FC<RestaurantProductsProps> = ({
           tempPrice += (itemPrice + addonPrice)*item.quantity
         }
       })
-      setSubTotal(tempPrice)
+      setSubTotal(Math.round(tempPrice * 100) / 100)
     }else{
       setRestaurantProducts([])
     }

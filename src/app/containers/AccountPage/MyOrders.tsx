@@ -34,9 +34,11 @@ const MyOrders = () => {
                   <Heading children="My Orders" isCenter={false} />
                   <div className="grid grid-cols-1 gap-3">
                     {orders.length > 0 && orders.map((item:any, key:number) => {
-                      return(
-                        <OrderCard data={item}/>
-                      )
+                      if(item){
+                        return(
+                          <OrderCard data={item}/>
+                        )
+                      }
                     })}
                     {/* <ListCard refresh={refresh} setRefresh={setRefresh} setCardList={setCardList}/> */}
                   </div>
