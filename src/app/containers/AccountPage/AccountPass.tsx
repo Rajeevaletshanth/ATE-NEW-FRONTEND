@@ -13,12 +13,13 @@ const AccountPass = () => {
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error,setError] = useState("")
-
+  const [loading, setLoading] = useState<boolean>(false)
   const { id } = useSelector((state:any) => state.auth.user)
   const { token } = useSelector((state:any) => state.auth.session)
 
   const handleSubmit = async(e:any) => {
     e.preventDefault()
+    setLoading(true)
     setError("")
     if(newPassword === confirmPassword){
       const data = {
@@ -27,11 +28,14 @@ const AccountPass = () => {
       }
       const response = await changePasswordApi(id,data,token)
       if(response.data.response === "success"){
+        setLoading(false)
         swal("Success", "Password updated successfully", "success")
       }else{
+        setLoading(false)
         swal("Sorry", response.data.message, "error")
       }
     }else{
+      setLoading(false)
       setError("New password and confirm password is not matching!")
     }
     
@@ -62,7 +66,7 @@ const AccountPass = () => {
                         <Input required type="password" className="mt-1.5" onChange={(e) => setConfirmPassword(e.target.value)}/>
                       </div>
                       <div className="pt-4 flex justify-center">
-                        <ButtonPrimary type="submit">Update Password</ButtonPrimary>
+                        <ButtonPrimary type="submit" loading={loading}>Update Password</ButtonPrimary>
                       </div>
                     </form>
               </div>

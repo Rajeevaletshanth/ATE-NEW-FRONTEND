@@ -29,6 +29,8 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
   const [name, setName] = useState<string>("")
   const [phone_no, setPhoneNo] = useState<string>("")
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const dispatch = useDispatch();
   
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +56,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 	}
 
   const editProfile = async() => {
+    setLoading(true)
     var profile = ""
     if(avatarFile.length > 0){
       profile = await getAvatar();
@@ -66,6 +69,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
 
     const response = await editUserApi(id, data, token)
     if(response.data.response === "success"){
+      setLoading(false)
       swal("Success", "Profile updated successfully", "success")
       dispatch(setUser({
         id: id,
@@ -76,6 +80,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
         phone: phone_no?phone_no:phone
       }))
     }else{
+      setLoading(false)
       swal("Sorry", "Please select a PNG, JPEG or WebP image file.", "error");
     }
   }
@@ -132,7 +137,7 @@ const AccountPage: FC<AccountPageProps> = ({ className = "" }) => {
                     </div>
                   </div>
                   <div className="pt-10 flex justify-center">
-                    <ButtonPrimary onClick={editProfile}>Update info</ButtonPrimary>
+                    <ButtonPrimary onClick={editProfile} loading={loading}>Update info</ButtonPrimary>
                   </div>
               </div>
             </div>
