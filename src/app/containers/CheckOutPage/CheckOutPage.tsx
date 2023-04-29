@@ -118,7 +118,7 @@ const CheckOutPage: FC<CheckOutPageProps> = ({ className = "" }) => {
         setDeliveryType("delivery")
       }
     }
-  },[])
+  },[products])
 
   
 

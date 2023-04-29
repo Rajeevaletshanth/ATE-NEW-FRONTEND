@@ -10,6 +10,7 @@ import SocialsList from "shared/SocialsList/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import LangDropdown from "components/Header/LangDropdown";
+import config from "../../config/config.json"
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -138,11 +139,11 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <div className="flex items-center justify-between py-6 px-5">
         <a
           className="inline-block"
-          href="https://themeforest.net/item/chisfis-online-booking-react-template/33515927"
+          href={`${config.ADMIN_URL}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <ButtonPrimary>Get Template</ButtonPrimary>
+          <ButtonPrimary className="px-2 py-1">Register my Restaurant</ButtonPrimary>
         </a>
 
         <LangDropdown panelClassName="z-10 w-screen max-w-[280px] px-4 mb-3 -right-3 bottom-full sm:px-0" />

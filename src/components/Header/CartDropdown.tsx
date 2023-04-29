@@ -67,7 +67,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
             <Popover.Button
               className={` ${
                 open ? "" : "text-opacity-90"
-              } group p-3 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex products-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative`}
+              } group p-3 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex products-center text-base font-medium hover:text-opacity-100 focus:outline-none  relative`}
             >
               {products.length > 0 && 
               <span className="w-4 h-4 bg-primary-500 text-gray-50 absolute top-1 right-1 rounded-full text-xs flex justify-center items-center">
@@ -85,7 +85,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-10 w-screen max-w-xs sm:max-w-sm px-4 mt-3 -right-28 sm:right-0 sm:px-0">
+              <Popover.Panel className="absolute z-10 w-screen max-w-xs md:max-w-sm mt-3 md:right-0 sm:px-0 right-0 left-auto" >
                 <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 ">
                 
                   <div className="relative grid bg-white dark:bg-neutral-800 p-3" >                 

@@ -11,7 +11,6 @@ import SwitchDarkMode from "shared/SwitchDarkMode/SwitchDarkMode";
 import HeroSearchForm2MobileFactory from "components/HeroSearchForm2Mobile/HeroSearchForm2MobileFactory";
 import { useSelector, useDispatch } from 'react-redux'
 
-
 export interface MainNav1Props {
   className?: string;
 }
@@ -30,9 +29,32 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
           <Navigation />
         </div>
 
-        <div className="lg:hidden flex-[3] max-w-lg !mx-auto md:px-3">
+        {/* <div className="lg:hidden flex-row mx-auto items-center space-x-0.5">
           <HeroSearchForm2MobileFactory />
-        </div>
+          <CartDropdown />
+        </div> */}
+        {/* <div className="md:hidden flex-[2] items-center justify-center lg:flex-none text-neutral-700 dark:text-neutral-100"> */}
+          <div className="flex flex-row container md:hidden  items-center space-x-0.5 py-2 justify-between">
+            {/* <HeroSearchForm2MobileFactory /> */}
+            <div className="flex justify-start">
+              <MenuBar iconClassName="h-7 w-7"/>
+              {/* <Logo className="w-16 mt-2"/> */}
+            </div>
+            
+            <div className="flex justify-end">
+              {/* <SwitchDarkMode /> */}
+              
+              {signedIn && <span className="flex flex-row ml-2 mr-2 mt-2">
+              <AvatarDropdown imgUrl={avatar}/>
+              </span>}
+              {!signedIn && 
+                <div className="flex flex-col justify-center ml-2 mr-2"><ButtonPrimary className="px-3 py-1" href="/login">Login</ButtonPrimary></div>
+              }
+              <CartDropdown />
+            </div>
+            
+          </div>
+        {/* </div> */}
 
         <div className="md:flex flex-shrink-0 items-center justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
           <div className="hidden lg:flex xl:flex items-center space-x-0.5">

@@ -2,12 +2,17 @@ import {
   HeartIcon,
   MagnifyingGlassIcon,
   UserCircleIcon,
+  HomeIcon,
+  ShoppingBagIcon,
+  PhoneIcon
 } from "@heroicons/react/24/outline";
 import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { PathName } from "routers/types";
 import MenuBar from "shared/MenuBar/MenuBar";
 import isInViewport from "utils/isInViewport";
+import { IoRestaurantOutline, IoBagCheckOutline } from 'react-icons/io5'
+import { useSelector } from "react-redux";
 
 let WIN_PREV_POSITION = window.pageYOffset;
 
@@ -19,29 +24,34 @@ interface NavItem {
 
 const NAV: NavItem[] = [
   {
-    name: "Explore",
+    name: "Home",
     link: "/",
-    icon: MagnifyingGlassIcon,
+    icon: HomeIcon,
   },
   {
-    name: "Wishlists",
-    link: "/savelists",
-    icon: HeartIcon,
+    name: "Restaurant",
+    link: "/restaurant",
+    icon: IoRestaurantOutline,
   },
   {
-    name: "Log in",
-    link: "/account",
-    icon: UserCircleIcon,
+    name: "Contact Us",
+    link: "/contactus",
+    icon: PhoneIcon,
   },
   {
-    name: "Menu",
-    icon: MenuBar,
-  },
+    name: "Checkout",
+    link: "/checkout",
+    icon: IoBagCheckOutline,
+  }
+  // {
+  //   name: "Menu",
+  //   icon: MenuBar,
+  // },
 ];
 
 const FooterNav = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  //
+  const { products } = useSelector((state: any) => state.cart.items)
 
   const location = useLocation();
 
@@ -94,7 +104,7 @@ const FooterNav = () => {
             <Link
               key={index}
               to={item.link}
-              className={`flex flex-col items-center justify-between text-neutral-500 dark:text-neutral-300/90 ${
+              className={`${item.name === "Checkout" ? products?.length === 0? "hidden" : "flex" : "flex"} flex-col items-center justify-between text-neutral-500 dark:text-neutral-300/90 ${
                 active ? "text-neutral-900 dark:text-neutral-100" : ""
               }`}
             >
@@ -114,7 +124,7 @@ const FooterNav = () => {
               <span className="text-[11px] leading-none mt-1">{item.name}</span>
             </div>
           );
-        })}
+        })} 
       </div>
     </div>
   );

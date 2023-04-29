@@ -299,7 +299,7 @@ const Dashboard = () => {
       <SectionHero2 className="pt-10 lg:pt-16 lg:pb-16" />
       {/* Top Brands */}
       {topBrands?.length > 0 ? (
-        <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+        <div className="container relative  mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
           <SectionSliderNewCategories
             categories={topBrands}
             categoryCardType="card2"
@@ -316,7 +316,7 @@ const Dashboard = () => {
 
       {/* Top Offers */}
       <div className="pt-1 pb-1 bg-gray-100 dark:bg-neutral-800 ">
-        <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+        <div className="container relative space-y-12 mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
           <SectionSliderNewCategories
             categories={OFFER_CAT}
             categoryCardType="card5"
@@ -331,7 +331,7 @@ const Dashboard = () => {
 
       {/* All Products */}
       {allProducts?.length > 0 ? (
-        <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+        <div className="container relative space-y-12 mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
           <SectionSliderNewCategoriesDifferentCard
             categories={allProducts}
             itemPerRow={4}
@@ -348,7 +348,7 @@ const Dashboard = () => {
       {/* All Combo Menu */}
       {allCombo?.length > 0 ? (
         <div className="pt-1 pb-1 bg-gray-100 dark:bg-neutral-800 ">
-          <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+          <div className="container relative space-y-12 mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
             <SectionSliderNewCategoriesDifferentCard
               categories={allCombo}
               itemPerRow={4}
@@ -365,7 +365,7 @@ const Dashboard = () => {
 
       {/* All Restaurants */}
       {allRestaurants?.length > 0 ? (
-        <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+        <div className="container relative space-y-12 mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
           <SectionSliderNewCategories
             categories={allRestaurants}
             categoryCardType="card7"
@@ -381,13 +381,13 @@ const Dashboard = () => {
       )}
 
       {/* Mobile App */}
-      <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28 p-8">
+      <div className="container relative space-y-12 mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
         <SectionDowloadApp />
       </div>
 
       {/* All Cuisines */}
       {allCuisines?.length > 0 ? (
-        <div className="container relative space-y-24 mb-24 mt-24 lg:space-y-28 lg:mb-28">
+        <div className="container relative space-y-12 mb-12 mt-12 md:mt-24 md:space-y-28 lg:mb-28">
           <SectionSliderNewCategories
             categories={allCuisines}
             categoryCardType="card2"
